@@ -1,6 +1,6 @@
 # Screenful
 
-`Screenful` is a set of JavaScript-and-CSS templates you can use to rapidly build web-based front-ends for editing arbitrary records in an arbitrary dataset. Applications include a UI for editing dictionaries, a UI for editing a database of digitized photographs, and a UI for editing a database of people. I use it on my own projects such as [Lexonomy](http://www.lexonomy.eu/) and [Ardán](http://ardan.gaois.ie/) and it cuts my front-end dev time from days to hours.
+`Screenful` is a set of JavaScript-and-CSS templates you can use to rapidly build web-based front-ends for editing arbitrary records in an arbitrary dataset. I use it on my own projects such as [Lexonomy](http://www.lexonomy.eu/) and [Ardán](http://ardan.gaois.ie/) and it cuts my front-end dev time from days to hours. Existing applications include a UI for editing dictionaries, a UI for editing a database of digitized photographs, and a UI for editing a database of people.
 
 ## Screenful.Navigator
 
