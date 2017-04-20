@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="UTF-8"/>
+		<title>Screenful Navigator</title>
+		<script type="text/javascript" src="../../jquery.js"></script>
+		<!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
+
+    <script type="text/javascript" src="../screenful.js"></script>
+    <link type="text/css" rel="stylesheet" href="../screenful.css" />
+
+		<script type="text/javascript" src="../screenful-navigator.js"></script>
+    <link type="text/css" rel="stylesheet" href="../screenful-navigator.css" />
+
+		<script type="text/javascript" src="../../xonomy/xonomy.js"></script>
+		<link type="text/css" rel="stylesheet" href="../../xonomy/xonomy.css" />
+
+		<script type="text/javascript" src="docspec.js"></script>
+		<script type="text/javascript">
+		Screenful.Navigator.listUrl="apilist.json";
+		Screenful.Navigator.stepSize=10;
+		Screenful.Navigator.editorUrl="editor.html";
+		Screenful.Navigator.critTemplate="<searchCriteria xml:space='preserve'></searchCriteria>";
+		Screenful.Navigator.renderer=function(xml){
+			var $xml=$($.parseXML(xml));
+			var html="";
+			html+="<span>"+$xml.find("somexml").text()+"</span>";
+			return html;
+		};
+		Xonomy.docSpec=docSpec;
+		Xonomy.setMode("laic");
+		Xonomy.lang="ga";
+		</script>
+
+		<!--app-specific styles go here:-->
+		<style>
+		#header { background-color: rgb(253, 255, 218); padding: 20px; border-bottom: 1px solid #a5a818; }
+		#footer { background-color: rgb(76, 158, 217); padding: 10px; }
+		</style>
+	</head>
+	<body>
+		<div id="header">Hello...<br/>there!</div>
+		<!-- <div id="footer">I am a footer</div> -->
+	</body>
+</html>
