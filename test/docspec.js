@@ -1,3 +1,5 @@
+var blankXml="<article id='' language=''><title></title><body><paragraph/></body></article>";
+
 var docSpec={
 	onchange: function(jsSurrogate){
 		//console.log(jsSurrogate.parent());
@@ -238,5 +240,3 @@ var docSpec={
 	},
 
 };
-
-var xml="<article id='' language='en'><title>Introduction</title><body><paragraph><b>Gleann Cholm Cille</b> (anglicized as <b>Glencolumbkille</b>) is a coastal district in the southwest <i>Gaeltacht</i> of County Donegal, Ireland.</paragraph><paragraph>While Gleann Cholm Cille is still an <a href='http://www.potafocal.com/'>Irish</a>-speaking community, English has been steadily replacing Irish as the main language, with only 34% of the people speaking Irish on a daily basis in 2002.</paragraph><paragraph>Cashel (Irish: <i>An Caiseal</i>) is the main village in the district.</paragraph></body></article>";

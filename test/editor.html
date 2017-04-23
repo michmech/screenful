@@ -6,33 +6,44 @@
 		<script type="text/javascript" src="../../jquery.js"></script>
 		<!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
 
-    <script type="text/javascript" src="../screenful.js"></script>
     <link type="text/css" rel="stylesheet" href="../screenful.css" />
-
+		<link type="text/css" rel="stylesheet" href="../screenful-editor.css" />
+		<script type="text/javascript" src="../screenful.js"></script>
 		<script type="text/javascript" src="../screenful-editor.js"></script>
-    <link type="text/css" rel="stylesheet" href="../screenful-editor.css" />
+		<script type="text/javascript" src="../screenful-loc-en.js"></script>
 
-		<script type="text/javascript" src="../../xonomy/xonomy.js"></script>
 		<link type="text/css" rel="stylesheet" href="../../xonomy/xonomy.css" />
-
+		<script type="text/javascript" src="../../xonomy/xonomy.js"></script>
 		<script type="text/javascript" src="docspec.js"></script>
+
 		<script type="text/javascript">
-    Screenful.Editor.createUrl="apicreate.json";
+		//Screenful.Editor.singleton=true; //optional
+		//Screenful.Editor.entryID="890"; //optional
+    Screenful.Editor.createUrl="apicreate.json"; //optional
 		Screenful.Editor.readUrl="apiread.json";
 		Screenful.Editor.updateUrl="apiupdate.json";
-		Screenful.Editor.deleteUrl="apidelete.json";
-		Screenful.Editor.template="<article id='' language=''><title></title><body><paragraph/></body></article>";
-		//Screenful.Editor.singleton=true;
-		Screenful.Editor.renderer=function(xml){
-			var $xml=$($.parseXML(xml));
+		Screenful.Editor.deleteUrl="apidelete.json"; //optional
+		Screenful.Editor.viewer=function(div, entry){ //optional
+			//div = an HTML element to render the viewable entry into
+			//entry = {id: "...", content: "..." or JSON}
+			var $xml=$($.parseXML(entry.content));
 			var html="";
 			html+="<h2>"+$xml.find("title").text()+"</h2>";
 			$xml.find("paragraph").each(function(){ html+="<p>"+$(this).text()+"</p>"; });
-			return html;
+			$(div).html(html);
 		};
-		Xonomy.docSpec=docSpec;
-		Xonomy.setMode("laic");
-		Xonomy.lang="ga";
+		Screenful.Editor.editor=function(div, entry){
+			//div = an HTML element to render the editable entry into
+			//entry = {id: "...", content: "..." or JSON}
+			Xonomy.setMode("nerd");
+			Xonomy.lang="ga";
+			Xonomy.render((entry ? entry.content : blankXml), div, docSpec);
+		};
+		Screenful.Editor.harvester=function(div){
+			//div = an HTML element to harvest the editable entry from
+			//returns "..." or JSON
+			return Xonomy.harvest();
+		};
 		</script>
 
 		<!--app-specific styles go here:-->

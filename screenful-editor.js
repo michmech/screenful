@@ -3,27 +3,32 @@ Screenful.Editor={
     Screenful.createEnvelope();
     $("#envelope").html("<div id='toolbar'></div><div id='container' class='empty'></div>");
     Screenful.Editor.populateToolbar();
-    Screenful.status("Réidh.");
+    Screenful.status(Screenful.Loc.ready);
     Screenful.Editor.updateToolbar();
+    if(Screenful.Editor.entryID) Screenful.Editor.open(null, Screenful.Editor.entryID);
   },
   populateToolbar: function(){
     var $toolbar=$("#toolbar");
     if(!Screenful.Editor.singleton) {
-		$("<button id='butNew' class='iconYes'>nua</buttton>").appendTo($toolbar).on("click", Screenful.Editor.new);
-		$("<span class='divider'></span>").appendTo($toolbar);
-		$("<input id='idbox'/>").appendTo($toolbar).on("keyup", function(event){
-			if(event.which==27) $("#idbox").val(Screenful.Editor.entryID);
-			if(event.which==13) Screenful.Editor.open(event);
-		  });
-		$("<button id='butOpen' class='iconOnly mergeLeft noborder'>&nbsp;</buttton>").appendTo($toolbar).on("click", Screenful.Editor.open);
-		$("<span class='divider'></span>").appendTo($toolbar);
-	}
-    if(Screenful.Editor.renderer) {
-		$("<button id='butEdit' class='iconYes'>athraigh</buttton>").appendTo($toolbar).on("click", Screenful.Editor.edit);
-		$("<button id='butView' class='iconYes'>cealaigh</buttton>").appendTo($toolbar).on("click", Screenful.Editor.view);
-	}
-    $("<button id='butSave' class='iconYes'>sábháil</buttton>").appendTo($toolbar).on("click", Screenful.Editor.save);
-    if(!Screenful.Editor.singleton) $("<button id='butDelete' class='iconYes noborder'>scrios</buttton>").appendTo($toolbar).on("click", Screenful.Editor.delete);;
+      if(Screenful.Editor.createUrl) {
+    		$("<button id='butNew' class='iconYes'>"+Screenful.Loc.new+"</buttton>").appendTo($toolbar).on("click", Screenful.Editor.new);
+    		$("<span class='divider'></span>").appendTo($toolbar);
+      }
+  		$("<input id='idbox'/>").appendTo($toolbar).on("keyup", function(event){
+  			if(event.which==27) $("#idbox").val(Screenful.Editor.entryID);
+  			if(event.which==13) Screenful.Editor.open(event);
+  		  });
+  		$("<button id='butOpen' class='iconOnly mergeLeft noborder'>&nbsp;</buttton>").appendTo($toolbar).on("click", Screenful.Editor.open);
+  		$("<span class='divider'></span>").appendTo($toolbar);
+  	}
+    if(Screenful.Editor.viewer) {
+  		$("<button id='butEdit' class='iconYes'>"+Screenful.Loc.edit+"</buttton>").appendTo($toolbar).on("click", Screenful.Editor.edit);
+  		$("<button id='butView' class='iconYes'>"+Screenful.Loc.cancel+"</buttton>").appendTo($toolbar).on("click", Screenful.Editor.view);
+  	}
+    $("<button id='butSave' class='iconYes'>"+Screenful.Loc.save+"</buttton>").appendTo($toolbar).on("click", Screenful.Editor.save);
+    if(!Screenful.Editor.singleton && Screenful.Editor.deleteUrl) {
+      $("<button id='butDelete' class='iconYes noborder'>"+Screenful.Loc.delete+"</buttton>").appendTo($toolbar).on("click", Screenful.Editor.delete);
+    }
   },
   entryID: null,
   updateToolbar: function(){
@@ -57,8 +62,9 @@ Screenful.Editor={
     id=$("#idbox").val("");
     Screenful.Editor.entryID=null;
     $("#container").removeClass("empty").html("<div id='editor'></div>");
-    Xonomy.render(Screenful.Editor.template, document.getElementById("editor"), Xonomy.docSpec);
-    Screenful.status("Réidh.");
+    Screenful.Editor.editor(document.getElementById("editor"));
+    $("#container").hide().fadeIn();
+    Screenful.status(Screenful.Loc.ready);
     Screenful.Editor.updateToolbar();
     if(window.parent!=window && window.parent.Screenful && window.parent.Screenful.Navigator) window.parent.Screenful.Navigator.setEntryAsCurrent(null);
   },
@@ -69,16 +75,17 @@ Screenful.Editor={
       $("#container").html("").addClass("empty");
       Screenful.Editor.entryID=null;
       Screenful.Editor.updateToolbar();
-      Screenful.status("Iontráil <b>$</b> á fáil...".replace("$", id));
+      Screenful.status(Screenful.Loc.reading, "wait"); //"reading entry"
       $.ajax({url: url, dataType: "json", method: "POST", data: {id: id}}).done(function(data){
         if(!data.success) {
-          Screenful.status("Níor éirigh liom iontráil <b>$</b> a fháil.".replace("$", id));
+          Screenful.status(Screenful.Loc.readingFailed, "warn"); //"failed to read entry"
         } else {
           Screenful.Editor.entryID=data.id;
           $("#idbox").val(data.id);
           $("#container").removeClass("empty").html("<div id='editor'></div>");
-          Xonomy.render(data.content, document.getElementById("editor"), Xonomy.docSpec);
-          Screenful.status("Réidh.");
+          Screenful.Editor.editor(document.getElementById("editor"), data);
+          $("#container").hide().fadeIn();
+          Screenful.status(Screenful.Loc.ready);
           Screenful.Editor.updateToolbar();
           if(window.parent!=window && window.parent.Screenful && window.parent.Screenful.Navigator) window.parent.Screenful.Navigator.setEntryAsCurrent(data.id);
         }
@@ -86,7 +93,7 @@ Screenful.Editor={
     }
   },
   view: function(event, id){
-	if(!Screenful.Editor.renderer) Screenful.Editor.edit(event, id);
+	if(!Screenful.Editor.viewer) Screenful.Editor.edit(event, id);
 	else {
 		if(!id) id=Screenful.Editor.entryID;
 		if(id) {
@@ -94,19 +101,20 @@ Screenful.Editor={
 		  $("#container").html("").addClass("empty");
 		  Screenful.Editor.entryID=null;
 		  Screenful.Editor.updateToolbar();
-		  Screenful.status("Iontráil <b>$</b> á fáil...".replace("$", id));
+      Screenful.status(Screenful.Loc.reading, "wait"); //"reading entry"
 		  $.ajax({url: url, dataType: "json", method: "POST", data: {id: id}}).done(function(data){
-			if(!data.success) {
-			  Screenful.status("Níor éirigh liom iontráil <b>$</b> a fháil.".replace("$", id));
-			} else {
-			  Screenful.Editor.entryID=data.id;
-			  $("#idbox").val(data.id);
-			  $("#container").removeClass("empty").html("<div id='viewer'></div>");
-			  $("#viewer").html(Screenful.Editor.renderer(data.content));
-			  Screenful.status("Réidh.");
-			  Screenful.Editor.updateToolbar();
-			  if(window.parent!=window && window.parent.Screenful && window.parent.Screenful.Navigator) window.parent.Screenful.Navigator.setEntryAsCurrent(data.id);
-			}
+  			if(!data.success) {
+          Screenful.status(Screenful.Loc.readingFailed, "warn"); //"failed to read entry"
+  			} else {
+  			  Screenful.Editor.entryID=data.id;
+  			  $("#idbox").val(data.id);
+  			  $("#container").removeClass("empty").html("<div id='viewer'></div>");
+          Screenful.Editor.viewer(document.getElementById("viewer"), data);
+          $("#container").hide().fadeIn();
+  			  Screenful.status(Screenful.Loc.ready);
+  			  Screenful.Editor.updateToolbar();
+  			  if(window.parent!=window && window.parent.Screenful && window.parent.Screenful.Navigator) window.parent.Screenful.Navigator.setEntryAsCurrent(data.id);
+  			}
 			});
 		}
 	}
@@ -116,7 +124,7 @@ Screenful.Editor={
     if(!id) {
       $("#container").html("").addClass("empty");
       Screenful.Editor.entryID=null;
-      Screenful.status("Réidh.");
+      Screenful.status(Screenful.Loc.ready);
       Screenful.Editor.updateToolbar();
       if(window.parent!=window && window.parent.Screenful && window.parent.Screenful.Navigator) window.parent.Screenful.Navigator.setEntryAsCurrent(null);
     } else {
@@ -126,43 +134,45 @@ Screenful.Editor={
   },
   save: function(event){
     var id=Screenful.Editor.entryID;
-    var content=Xonomy.harvest();
+    var content=Screenful.Editor.harvester(document.getElementById("editor"));
     $("#container").addClass("empty");
     if(!id) { //we are creating a new entry
-      Screenful.status("Iontráil á sábháil...");
+      Screenful.status(Screenful.Loc.saving, "wait"); //"saving entry..."
       $.ajax({url: Screenful.Editor.createUrl, dataType: "json", method: "POST", data: {content: content}}).done(function(data){
         if(!data.success) {
-          Screenful.status("Níor éirigh liom an iontráil a shábháil.");
+          Screenful.status(Screenful.Loc.savingFailed, "warn"); //"failed to save entry"
         } else {
           Screenful.Editor.entryID=data.id;
           $("#idbox").val(data.id);
-          if(Screenful.Editor.renderer) {
-			$("#container").removeClass("empty").html("<div id='viewer'></div>");
-			$("#viewer").html(Screenful.Editor.renderer(data.content));
-		  } else {
-			$("#container").removeClass("empty").html("<div id='editor'></div>");
-			Xonomy.render(data.content, document.getElementById("editor"), Xonomy.docSpec);
-		  }
-          Screenful.status("Réidh.");
+          if(Screenful.Editor.viewer) {
+      			$("#container").removeClass("empty").html("<div id='viewer'></div>");
+            Screenful.Editor.viewer(document.getElementById("viewer"), data);
+    		  } else {
+      			$("#container").removeClass("empty").html("<div id='editor'></div>");
+            Screenful.Editor.editor(document.getElementById("editor"), data);
+    		  }
+          $("#container").hide().fadeIn();
+          Screenful.status(Screenful.Loc.ready);
           Screenful.Editor.updateToolbar();
         }
     	});
     } else { //we are updating an existing entry
-      Screenful.status("Iontráil á sábháil...");
+      Screenful.status(Screenful.Loc.saving, "wait"); //"saving entry..."
       $.ajax({url: Screenful.Editor.updateUrl, dataType: "json", method: "POST", data: {id: id, content: content}}).done(function(data){
         if(!data.success) {
-          Screenful.status("Níor éirigh liom an iontráil a shábháil.");
+          Screenful.status(Screenful.Loc.savingFailed, "warn"); //"failed to save entry"
         } else {
           Screenful.Editor.entryID=data.id;
           $("#idbox").val(data.id);
-          if(Screenful.Editor.renderer) {
-			$("#container").removeClass("empty").html("<div id='viewer'></div>");
-			$("#viewer").html(Screenful.Editor.renderer(data.content));
-		  } else {
-			$("#container").removeClass("empty").html("<div id='editor'></div>");
-			Xonomy.render(data.content, document.getElementById("editor"), Xonomy.docSpec);
-		  }
-          Screenful.status("Réidh.");
+          if(Screenful.Editor.viewer) {
+            $("#container").removeClass("empty").html("<div id='viewer'></div>");
+            Screenful.Editor.viewer(document.getElementById("viewer"), data);
+		      } else {
+			      $("#container").removeClass("empty").html("<div id='editor'></div>");
+            Screenful.Editor.editor(document.getElementById("editor"), data);
+		      }
+          $("#container").hide().fadeIn();
+          Screenful.status(Screenful.Loc.ready);
           Screenful.Editor.updateToolbar();
         }
     	});
@@ -170,16 +180,16 @@ Screenful.Editor={
   },
   delete: function(event){
     var id=Screenful.Editor.entryID;
-    if(confirm("Déanfar an iontráil a scrios anois.")){
-      Screenful.status("Iontráil á scrios...");
+    if(confirm(Screenful.Loc.deleteConfirm)){ //"are you sure?"
+      Screenful.status(Screenful.Loc.deleting, "wait"); //"deleting entry..."
       $.ajax({url: Screenful.Editor.deleteUrl, dataType: "json", method: "POST", data: {id: id}}).done(function(data){
         if(!data.success) {
-          Screenful.status("Níor éirigh liom an iontráil a scrios.");
+          Screenful.status(Screenful.Loc.deletingFailed, "warn"); //"failed to delete entry"
         } else {
           Screenful.Editor.entryID=null;
           $("#idbox").val("");
           $("#container").addClass("empty").html("");
-          Screenful.status("Réidh.");
+          Screenful.status(Screenful.Loc.ready);
           Screenful.Editor.updateToolbar();
         }
     	});

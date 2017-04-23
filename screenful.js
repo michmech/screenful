@@ -15,9 +15,13 @@ var Screenful={
     $("#envelope").css("top", headerHeight+"px");
     $("#envelope").css("bottom", (footerHeight+statusbarHeight+2)+"px");
   },
-  status: function(str){
-    if(window.parent!=window && window.parent.Screenful) window.parent.Screenful.status(str);
-    else $("#statusbar").html(str);
+  status: function(str, style){
+    if(window.parent!=window && window.parent.Screenful) window.parent.Screenful.status(str, style);
+    else {
+      if(style=="wait") str="<span class='wait'></span>"+str;
+      if(style=="warn") str="<span class='warn'></span>"+str;
+      $("#statusbar").html(str);
+    }
   },
 
   wycLastID: 0,
