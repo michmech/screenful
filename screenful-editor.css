@@ -1,5 +1,5 @@
-#toolbar { position: absolute; top: 0px; left: 0px; right: 0px; height: 52px; box-shadow: -2px 2px 2px #999999; }
-#container { position: absolute; top: 54px; bottom: 0px; left: 15px; right: 0px; overflow-x: hidden; overflow-y: scroll; padding: 5px 0px; xbox-shadow: inset 2px 2px 2px #999999; }
+#toolbar { position: absolute; top: 0px; left: 0px; right: 0px; height: 52px; box-shadow: -2px 2px 2px #999999; overflow-x: hidden; white-space: nowrap; }
+#container { position: absolute; top: 54px; bottom: 0px; left: 15px; right: 0px; overflow-x: hidden; overflow-y: scroll; padding: 5px 20px 5px 0px; xbox-shadow: inset 2px 2px 2px #999999; }
 #container #editor { margin-bottom: 20px; padding-bottom: 300px; }
 #container.empty {}
 
@@ -9,6 +9,8 @@
 #toolbar button.iconYes#butNew {background-image: url(lightning.png);}
 #toolbar button.iconOnly#butOpen {background-image: url(resultset_next.png);}
 #toolbar button.iconYes#butSave {background-image: url(disk.png);}
+#toolbar button.iconYes#butSave span.star {color: #ff0000; position: relative; top: 2px;}
 #toolbar button.iconYes#butEdit {background-image: url(cut.png);}
 #toolbar button.iconYes#butView {background-image: url(arrow_left.png);}
+#toolbar button.iconYes#butNonew {background-image: url(arrow_left.png);}
 #toolbar button.iconYes#butDelete {background-image: url(delete.png);}

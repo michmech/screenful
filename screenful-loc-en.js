@@ -1,10 +1,10 @@
 Screenful.Loc={
   howmany: function(n){ if(n==1) return n+" entry"; return n+" entries"; },
   ready: "Ready.",
-  filter: "Filter...",
+  filter: "Filter",
+  removeFilter: "Clear",
   reload: "Reload",
   cancel: "Cancel",
-  go: "Go",
   more: "More",
   new: "New",
   edit: "Edit",

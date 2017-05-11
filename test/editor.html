@@ -35,6 +35,7 @@
 		Screenful.Editor.editor=function(div, entry){
 			//div = an HTML element to render the editable entry into
 			//entry = {id: "...", content: "..." or JSON}
+			docSpec.onchange=Screenful.Editor.changed;
 			Xonomy.setMode("nerd");
 			Xonomy.lang="ga";
 			Xonomy.render((entry ? entry.content : blankXml), div, docSpec);

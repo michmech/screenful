@@ -31,6 +31,7 @@
 		Screenful.Navigator.critEditor=function(div, crits){
 			//div = an HTML element to render the criteria editor into
 			//crits = "..." or JSON,  the criteria to render; if undefined then render blank criteria
+			Xonomy.setMode("laic");
 			Xonomy.render(crits||blankXml, div, docSpec);
 		};
 		Screenful.Navigator.critHarvester=function(div){
