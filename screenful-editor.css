@@ -1,4 +1,4 @@
-#toolbar { position: absolute; top: 0px; left: 0px; right: 0px; height: 52px; box-shadow: -2px 2px 2px #999999; overflow-x: hidden; white-space: nowrap; }
+#toolbar { position: absolute; top: 0px; left: 0px; right: 0px; height: 52px; box-shadow: -2px 2px 2px #999999; overflow-x: hidden; white-space: nowrap; overflow-y: hidden; }
 #container { position: absolute; top: 54px; bottom: 0px; left: 15px; right: 0px; overflow-x: hidden; overflow-y: scroll; padding: 5px 20px 5px 0px; xbox-shadow: inset 2px 2px 2px #999999; }
 #container #editor { margin-bottom: 20px; padding-bottom: 300px; }
 #container.empty {}

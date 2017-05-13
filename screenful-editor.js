@@ -25,7 +25,7 @@ Screenful.Editor={
   		$("<button id='butEdit' class='iconYes'>"+Screenful.Loc.edit+"</buttton>").appendTo($toolbar).on("click", Screenful.Editor.edit);
   		$("<button id='butView' class='iconYes'>"+Screenful.Loc.cancel+"</buttton>").appendTo($toolbar).on("click", Screenful.Editor.view);
   	}
-    $("<button id='butNonew' class='iconYes'>"+Screenful.Loc.cancel+"</buttton>").appendTo($toolbar).on("click", Screenful.Editor.nonew);
+    if(!Screenful.Editor.singleton) $("<button id='butNonew' class='iconYes'>"+Screenful.Loc.cancel+"</buttton>").appendTo($toolbar).on("click", Screenful.Editor.nonew);
     $("<button id='butSave' class='iconYes'>"+Screenful.Loc.save+"<span class='star' style='display: none'>*</span></buttton>").appendTo($toolbar).on("click", Screenful.Editor.save);
     if(!Screenful.Editor.singleton && Screenful.Editor.deleteUrl) {
       $("<button id='butDelete' class='iconYes noborder'>"+Screenful.Loc.delete+"</buttton>").appendTo($toolbar).on("click", Screenful.Editor.delete);

@@ -20,9 +20,10 @@
 		Screenful.Navigator.listUrl="apilist.json";
 		Screenful.Navigator.stepSize=10;
 		Screenful.Navigator.editorUrl="editor.html";
-		Screenful.Navigator.renderer=function(div, entry){
+		Screenful.Navigator.renderer=function(div, entry, searchtext){
 			//div = an HTML element to render the entry into
 			//entry = {id: "...", content: "..." or JSON}
+			//searchtext = the contents of the search box, in case you want to highlight occurences of it
 			var $xml=$($.parseXML(entry.content));
 			var html="";
 			html+="<span>"+$xml.find("somexml").text()+"</span>";

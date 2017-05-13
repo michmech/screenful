@@ -2,7 +2,7 @@ Screenful.Loc={
   howmany: function(n){ return n+" iontráil"; },
   ready: "Réidh.",
   filter: "Scag",
-  removeFilter: "Bain",
+  removeFilter: "Bain scagaire",
   reload: "Athlódáil",
   cancel: "Cealaigh",
   more: "Tuilleadh",
