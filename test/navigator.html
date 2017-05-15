@@ -29,13 +29,13 @@
 			html+="<span>"+$xml.find("somexml").text()+"</span>";
 			$(div).html(html);
 		};
-		Screenful.Navigator.critEditor=function(div, crits){
+		Screenful.Navigator.critEditor=function(div, crits){ //optional
 			//div = an HTML element to render the criteria editor into
 			//crits = "..." or JSON,  the criteria to render; if undefined then render blank criteria
 			Xonomy.setMode("laic");
 			Xonomy.render(crits||blankXml, div, docSpec);
 		};
-		Screenful.Navigator.critHarvester=function(div){
+		Screenful.Navigator.critHarvester=function(div){ //optional
 			//div = an HTML element to harvest the criteria from
 			//returns "..." or JSON
 			return Xonomy.harvest();

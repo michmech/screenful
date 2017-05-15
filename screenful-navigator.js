@@ -10,14 +10,17 @@ Screenful.Navigator={
     });
     $("#butSearch").on("click", Screenful.Navigator.critGo);
     $("#navbox").append("<div class='line2'><span id='countcaption'>"+Screenful.Loc.howmany(0)+"</span><button class='iconYes noborder' id='butReload'>"+Screenful.Loc.reload+"</button></div>");
+    if(!(Screenful.Navigator.critEditor && Screenful.Navigator.critHarvester)) $("#butCritOpen").remove();
     $("#butCritOpen").on("click", Screenful.Navigator.critOpen);
     $("#butReload").on("click", Screenful.Navigator.reload);
     $("#critbox").html("<div id='editor'></div><div class='buttons'><button class='iconYes' id='butCritCancel'>"+Screenful.Loc.cancel+"</button><button class='iconYes' id='butCritGo'>"+Screenful.Loc.filter+"</button></div>");
     $("#butCritCancel").on("click", Screenful.Navigator.critCancel);
     $("#butCritGo").on("click", Screenful.Navigator.critGo);
     $("#butCritRemove").on("click", Screenful.Navigator.critRemove);
-    Screenful.Navigator.critEditor(document.getElementById("editor"));
-    Screenful.Navigator.critTemplate=Screenful.Navigator.critHarvester(document.getElementById("editor"));
+    if(Screenful.Navigator.critEditor && Screenful.Navigator.critHarvester) {
+      Screenful.Navigator.critEditor(document.getElementById("editor"));
+      Screenful.Navigator.critTemplate=Screenful.Navigator.critHarvester(document.getElementById("editor"));
+    }
     Screenful.Navigator.list();
     $(document).on("click", function(){
       if(window.frames["editframe"] && window.frames["editframe"].Xonomy) window.frames["editframe"].Xonomy.clickoff();
@@ -28,7 +31,7 @@ Screenful.Navigator={
     Screenful.Navigator.lastStepSize=howmany;
     Screenful.status(Screenful.Loc.listing, "wait"); //"getting list of entries"
     var url=Screenful.Navigator.listUrl;
-    var criteria=Screenful.Navigator.critHarvester(document.getElementById("editor"));
+    var criteria=null; if(Screenful.Navigator.critHarvester) Screenful.Navigator.critHarvester(document.getElementById("editor"));
     var searchtext=$.trim($("#searchbox").val());
     if(criteria!=Screenful.Navigator.critTemplate) {
       $("#butCritOpen").addClass("on");
@@ -95,7 +98,7 @@ Screenful.Navigator={
     Screenful.Navigator.list();
   },
   critRemove: function(event){
-    Screenful.Navigator.critEditor(document.getElementById("editor"));
+    if(Screenful.Navigator.critEditor) Screenful.Navigator.critEditor(document.getElementById("editor"));
     $("#searchbox").val("");
     $("#listbox").scrollTop(0);
     Screenful.Navigator.list();
