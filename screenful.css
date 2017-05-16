@@ -1,7 +1,7 @@
 body {font-family: sans-serif; background-color: #ffffff; margin: 0; padding: 0; overflow: hidden; line-height: 1.3em; font-size: 0.9rem;}
 #header { position: absolute; top: 0px; left: 0px; right: 0px; }
 #envelope { position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; }
-#statusbar { position: absolute; bottom: 0px; left: 0px; right: 0px; padding: 5px 15px; color: #666666; font-size: 0.9em; height: 1.3em; overflow: hidden; box-shadow: 0px -2px 2px #999999; }
+#statusbar { position: absolute; bottom: 0px; left: 0px; right: 0px; padding: 5px 15px; background-color: #dddddd; color: #666666; font-size: 0.9em; height: 1.3em; overflow: hidden; box-shadow: 0px -2px 2px #999999; }
 #footer { position: absolute; bottom: 0px; left: 0px; right: 0px; }
 #curtain { position: absolute; top: 0px; bottom: 0px; left: 0px; right: 0px; background-color: #333333; opacity: 0.5; z-index: 5;}
 

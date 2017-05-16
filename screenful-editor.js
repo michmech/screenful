@@ -158,6 +158,7 @@ Screenful.Editor={
           $("#container").hide().fadeIn();
           Screenful.status(Screenful.Loc.ready);
           Screenful.Editor.updateToolbar();
+          if(window.parent!=window && window.parent.Screenful && window.parent.Screenful.Navigator) window.parent.Screenful.Navigator.refresh();
         }
     	});
     } else { //we are updating an existing entry
@@ -178,6 +179,7 @@ Screenful.Editor={
           $("#container").hide().fadeIn();
           Screenful.status(Screenful.Loc.ready);
           Screenful.Editor.updateToolbar();
+          if(window.parent!=window && window.parent.Screenful && window.parent.Screenful.Navigator) window.parent.Screenful.Navigator.refresh();
         }
     	});
     }
@@ -195,6 +197,7 @@ Screenful.Editor={
           $("#container").addClass("empty").html("");
           Screenful.status(Screenful.Loc.ready);
           Screenful.Editor.updateToolbar();
+          if(window.parent!=window && window.parent.Screenful && window.parent.Screenful.Navigator) window.parent.Screenful.Navigator.refresh();
         }
     	});
     }
