@@ -206,4 +206,4 @@ Screenful.Editor={
     $("#butSave .star").show();
   },
 };
-$().ready(Screenful.Editor.start);
+$(window).ready(Screenful.Editor.start);

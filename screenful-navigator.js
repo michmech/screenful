@@ -111,4 +111,4 @@ Screenful.Navigator={
     Screenful.Navigator.list(null, Screenful.Navigator.lastStepSize, true);
   },
 };
-$().ready(Screenful.Navigator.start);
+$(window).ready(Screenful.Navigator.start);
