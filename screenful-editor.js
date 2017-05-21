@@ -21,12 +21,13 @@ Screenful.Editor={
   		$("<button id='butOpen' class='iconOnly mergeLeft noborder'>&nbsp;</buttton>").appendTo($toolbar).on("click", Screenful.Editor.open);
   		$("<span class='divider'></span>").appendTo($toolbar);
   	}
+    $("<button id='butSave' class='iconYes'>"+Screenful.Loc.save+"<span class='star' style='display: none'>*</span></buttton>").appendTo($toolbar).on("click", Screenful.Editor.save);
     if(Screenful.Editor.viewer) {
   		$("<button id='butEdit' class='iconYes'>"+Screenful.Loc.edit+"</buttton>").appendTo($toolbar).on("click", Screenful.Editor.edit);
   		$("<button id='butView' class='iconYes'>"+Screenful.Loc.cancel+"</buttton>").appendTo($toolbar).on("click", Screenful.Editor.view);
   	}
     if(!Screenful.Editor.singleton) $("<button id='butNonew' class='iconYes'>"+Screenful.Loc.cancel+"</buttton>").appendTo($toolbar).on("click", Screenful.Editor.nonew);
-    $("<button id='butSave' class='iconYes'>"+Screenful.Loc.save+"<span class='star' style='display: none'>*</span></buttton>").appendTo($toolbar).on("click", Screenful.Editor.save);
+    if(Screenful.Editor.leaveUrl) $("<button id='butLeave' class='iconYes'>"+Screenful.Loc.cancel+"</buttton>").appendTo($toolbar).on("click", function(){window.location=Screenful.Editor.leaveUrl});
     if(!Screenful.Editor.singleton && Screenful.Editor.deleteUrl) {
       $("<button id='butDelete' class='iconYes noborder'>"+Screenful.Loc.delete+"</buttton>").appendTo($toolbar).on("click", Screenful.Editor.delete);
     }
@@ -57,6 +58,11 @@ Screenful.Editor={
       $("#butNonew").hide();
       $("#butSave").show(); $("#butSave .star").hide();
       $("#butDelete").show();
+    }
+    if($("#butNonew:visible").length==0 && $("#butView:visible").length==0){
+      $("#butLeave").show();
+    } else {
+      $("#butLeave").hide();
     }
   },
   new: function(event){

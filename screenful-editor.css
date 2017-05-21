@@ -12,5 +12,6 @@
 #toolbar button.iconYes#butSave span.star {color: #ff0000; position: relative; top: 2px;}
 #toolbar button.iconYes#butEdit {background-image: url(cut.png);}
 #toolbar button.iconYes#butView {background-image: url(arrow_left.png);}
+#toolbar button.iconYes#butLeave {background-image: url(arrow_left.png);}
 #toolbar button.iconYes#butNonew {background-image: url(arrow_left.png);}
 #toolbar button.iconYes#butDelete {background-image: url(delete.png);}
