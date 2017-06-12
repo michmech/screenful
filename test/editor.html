@@ -40,6 +40,7 @@
 			Xonomy.setMode("nerd");
 			Xonomy.lang="ga";
 			Xonomy.render((entry ? entry.content : blankXml), div, docSpec);
+			if(!Xonomy.keyNav) Xonomy.startKeyNav(document, document.getElementById("container"));
 		};
 		Screenful.Editor.harvester=function(div){
 			//div = an HTML element to harvest the editable entry from

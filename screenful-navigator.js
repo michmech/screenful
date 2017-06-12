@@ -73,6 +73,7 @@ Screenful.Navigator={
     var entry=event.data;
     if(window.frames["editframe"].Screenful) {
       window.frames["editframe"].Screenful.Editor.open(null, entry.id);
+      window.frames["editframe"].focus();
     }
   },
   setEntryAsCurrent: function(id){
