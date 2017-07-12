@@ -1,9 +1,10 @@
 Screenful.Navigator={
   start: function(){
     Screenful.createEnvelope();
-    $("#envelope").html("<div id='navbox'></div><div id='listbox'></div><div id='editbox'></div><div id='critbox' style='display: none'></div>");
+    $("#envelope").html("<div id='navbox'></div><div id='listbox'></div><div id='editbox'></div><div id='critbox' tabindex='0' style='display: none'></div>");
     $("#editbox").html("<iframe name='editframe' frameborder='0' scrolling='no' src='"+Screenful.Navigator.editorUrl+"'/>");
     $("#navbox").html("<div class='line1'><button class='iconOnly' id='butCritOpen'>&nbsp;</button><input id='searchbox'/><button id='butSearch' class='iconOnly mergeLeft noborder'>&nbsp;</buttton><button class='iconYes noborder' id='butCritRemove' style='display: none;'>"+Screenful.Loc.removeFilter+"</button></div>");
+    $("#searchbox").on("keydown", function(e){if(!e.altKey) e.stopPropagation()});
     $("#searchbox").on("keyup", function(event){
       if(event.which==27) $("#searchbox").val("");
       if(event.which==13) Screenful.Navigator.critGo(event);
@@ -14,6 +15,7 @@ Screenful.Navigator={
     $("#butCritOpen").on("click", Screenful.Navigator.critOpen);
     $("#butReload").on("click", Screenful.Navigator.reload);
     $("#critbox").html("<div id='editor'></div><div class='buttons'><button class='iconYes' id='butCritCancel'>"+Screenful.Loc.cancel+"</button><button class='iconYes' id='butCritGo'>"+Screenful.Loc.filter+"</button></div>");
+    $("#critbox").on("keydown", function(e){e.stopPropagation(); e.preventDefault()});
     $("#butCritCancel").on("click", Screenful.Navigator.critCancel);
     $("#butCritGo").on("click", Screenful.Navigator.critGo);
     $("#butCritRemove").on("click", Screenful.Navigator.critRemove);
@@ -25,7 +27,55 @@ Screenful.Navigator={
     $(document).on("click", function(){
       if(window.frames["editframe"] && window.frames["editframe"].Xonomy) window.frames["editframe"].Xonomy.clickoff();
     });
+
+    //keyboard nav:
+    $(document).on("keydown", function(e){
+      if(e.which==37 && e.altKey){ //arrow down key
+        e.preventDefault();
+        Screenful.Navigator.focusEntryList();
+      }
+      if(e.which==39 && e.altKey){ //arrow right key
+        if(window.frames["editframe"].Screenful) {
+          e.preventDefault();
+          window.frames["editframe"].focus();
+        }
+      }
+      if(e.which==69 && (e.ctrlKey||e.metaKey)){ //E key
+        if(window.frames["editframe"].Screenful){
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          window.frames["editframe"].$("#butEdit:visible").click();
+          window.frames["editframe"].$("#butView:visible").click();
+          window.frames["editframe"].focus();
+        }
+      }
+      if(e.which==65 && (e.ctrlKey||e.metaKey)){ //A key
+        if(window.frames["editframe"].Screenful){
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          window.frames["editframe"].$("#butSave:visible").click();
+          window.frames["editframe"].focus();
+        }
+      }
+      if(e.which==74 && (e.ctrlKey||e.metaKey)){ //J key
+        if(window.frames["editframe"].Screenful){
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          window.frames["editframe"].$("#butNew:visible").click();
+          window.frames["editframe"].focus();
+        }
+      }
+    });
   },
+
+  lastFocusedEntryID: "",
+  focusEntryList: function(){
+    if(Screenful.Navigator.lastFocusedEntryID && $("#listbox .entry[data-id=\""+Screenful.Navigator.lastFocusedEntryID+"\"]").length>0)
+      $("#listbox .entry[data-id=\""+Screenful.Navigator.lastFocusedEntryID+"\"]").focus();
+    else
+      $("#listbox .entry").first().focus();
+  },
+
   list: function(event, howmany, noSFX){
     if(!howmany) howmany=Screenful.Navigator.stepSize;
     Screenful.Navigator.lastStepSize=howmany;
@@ -48,7 +98,7 @@ Screenful.Navigator={
         $("#countcaption").html(Screenful.Loc.howmany(data.total));
         $("#listbox").html("");
         data.entries.forEach(function(entry){
-          $("#listbox").append("<div class='entry' data-id='"+entry.id+"'>"+entry.id+"</div>");
+          $("#listbox").append("<div class='entry' tabindex='0' data-id='"+entry.id+"'>"+entry.id+"</div>");
           Screenful.Navigator.renderer($("div.entry[data-id=\""+entry.id+"\"]").toArray()[0], entry, searchtext);
           $("div.entry[data-id=\""+entry.id+"\"]").on("click", entry, Screenful.Navigator.openEntry);
         });
@@ -62,6 +112,33 @@ Screenful.Navigator={
           Screenful.Navigator.setEntryAsCurrent(currentEntryID);
         }
         Screenful.status(Screenful.Loc.ready);
+        Screenful.Navigator.focusEntryList();
+
+        //keyboard nav:
+        $("#listbox .entry").on("keydown", function(e){
+          if(e.which==40){ //arrow down key
+            e.preventDefault();
+            if(e.ctrlKey||e.metaKey) $("#listbox").scrollTop($("#listbox").scrollTop()+60);
+            else {
+              $(e.delegateTarget).next().focus();
+              Screenful.Navigator.lastFocusedEntryID=$("#listbox .entry:focus").attr("data-id");
+            }
+          }
+          if(e.which==38){ //arrow up key
+            e.preventDefault();
+            if(e.ctrlKey||e.metaKey) $("#listbox").scrollTop($("#listbox").scrollTop()-60);
+            else {
+              $(e.delegateTarget).prev().focus();
+              Screenful.Navigator.lastFocusedEntryID=$("#listbox .entry:focus").attr("data-id");
+            }
+          }
+          if(e.which==13){ //Enter key
+            e.preventDefault(); $(e.delegateTarget).click();
+          }
+        });
+        $("#listbox .entry").on("click", function(e){
+          Screenful.Navigator.lastFocusedEntryID=$(e.delegateTarget).attr("data-id");
+        });
       }
     });
   },
@@ -85,7 +162,7 @@ Screenful.Navigator={
   critOpen: function(event){
     Screenful.Navigator.previousCrit=Screenful.Navigator.critHarvester(document.getElementById("editor")); //save previous criteria for later, in case the user cancels
     $("#curtain").show().one("click", Screenful.Navigator.critCancel);
-    $("#critbox").show();
+    $("#critbox").show().focus();
   },
   critCancel: function(event){
     $("#critbox").hide();
