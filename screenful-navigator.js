@@ -40,7 +40,7 @@ Screenful.Navigator={
           window.frames["editframe"].focus();
         }
       }
-      if(e.which==69 && (e.ctrlKey||e.metaKey)){ //E key
+      if(e.which==69 && (e.ctrlKey||e.metaKey) && e.shiftKey){ //E key
         if(window.frames["editframe"].Screenful){
           e.preventDefault();
           e.stopImmediatePropagation();
@@ -49,7 +49,7 @@ Screenful.Navigator={
           window.frames["editframe"].focus();
         }
       }
-      if(e.which==65 && (e.ctrlKey||e.metaKey)){ //A key
+      if(e.which==83 && (e.ctrlKey||e.metaKey) && e.shiftKey){ //S key
         if(window.frames["editframe"].Screenful){
           e.preventDefault();
           e.stopImmediatePropagation();
@@ -57,7 +57,7 @@ Screenful.Navigator={
           window.frames["editframe"].focus();
         }
       }
-      if(e.which==74 && (e.ctrlKey||e.metaKey)){ //J key
+      if(e.which==78 && (e.ctrlKey||e.metaKey) && e.shiftKey){ //N key
         if(window.frames["editframe"].Screenful){
           e.preventDefault();
           e.stopImmediatePropagation();

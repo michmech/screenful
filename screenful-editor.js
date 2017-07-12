@@ -9,7 +9,7 @@ Screenful.Editor={
 
     //keyboard nav:
     $(document).on("keydown", function(e){
-      //console.log(e.which, e.ctrlKey, e.metaKey, e.altKey, e.altGraphKey);
+      //console.log(e.which, e.ctrlKey, e.metaKey, e.altKey, e.altGraphKey, e.shiftKey);
       if(e.which==37 && e.altKey){ //arrow left key
         if(window.parent!=window && window.parent.Screenful && window.parent.Screenful.Navigator) {
           e.preventDefault();
@@ -17,18 +17,18 @@ Screenful.Editor={
           window.parent.Screenful.Navigator.focusEntryList();
         }
       }
-      if(e.which==69 && (e.ctrlKey||e.metaKey)){ //E key
+      if(e.which==69 && (e.ctrlKey||e.metaKey) && e.shiftKey){ //E key
         e.preventDefault();
         e.stopImmediatePropagation();
         $("#butEdit:visible").click();
         $("#butView:visible").click();
       }
-      if(e.which==65 && (e.ctrlKey||e.metaKey)){ //A key
+      if(e.which==83 && (e.ctrlKey||e.metaKey) && e.shiftKey){ //S key
         e.preventDefault();
         e.stopImmediatePropagation();
         $("#butSave:visible").click();
       }
-      if(e.which==74 && (e.ctrlKey||e.metaKey)){ //J key
+      if(e.which==78 && (e.ctrlKey||e.metaKey) && e.shiftKey){ //N key
         e.preventDefault();
         e.stopImmediatePropagation();
         $("#butNew:visible").click();
@@ -40,7 +40,7 @@ Screenful.Editor={
     var $toolbar=$("#toolbar");
     if(!Screenful.Editor.singleton) {
       if(Screenful.Editor.createUrl) {
-    		$("<button id='butNew' title='Ctrl + J' class='iconYes'>"+Screenful.Loc.new+"</buttton>").appendTo($toolbar).on("click", Screenful.Editor.new);
+    		$("<button id='butNew' title='Ctrl + Shift + N' class='iconYes'>"+Screenful.Loc.new+"</buttton>").appendTo($toolbar).on("click", Screenful.Editor.new);
     		$("<span class='divider'></span>").appendTo($toolbar);
       }
       $("<span id='idlabel'>ID</span>").appendTo($toolbar);
@@ -51,10 +51,10 @@ Screenful.Editor={
   		$("<button id='butOpen' class='iconOnly mergeLeft noborder'>&nbsp;</buttton>").appendTo($toolbar).on("click", Screenful.Editor.open);
   		$("<span class='divider'></span>").appendTo($toolbar);
   	}
-    $("<button id='butSave' title='Ctrl + A' class='iconYes'>"+Screenful.Loc.save+"<span class='star' style='display: none'>*</span></buttton>").appendTo($toolbar).on("click", Screenful.Editor.save);
+    $("<button id='butSave' title='Ctrl + Shift + S' class='iconYes'>"+Screenful.Loc.save+"<span class='star' style='display: none'>*</span></buttton>").appendTo($toolbar).on("click", Screenful.Editor.save);
     if(Screenful.Editor.viewer) {
-  		$("<button id='butEdit' title='Ctrl + E' class='iconYes'>"+Screenful.Loc.edit+"</buttton>").appendTo($toolbar).on("click", Screenful.Editor.edit);
-  		$("<button id='butView' title='Ctrl + E' class='iconYes'>"+Screenful.Loc.cancel+"</buttton>").appendTo($toolbar).on("click", Screenful.Editor.view);
+  		$("<button id='butEdit' title='Ctrl + Shift + E' class='iconYes'>"+Screenful.Loc.edit+"</buttton>").appendTo($toolbar).on("click", Screenful.Editor.edit);
+  		$("<button id='butView' title='Ctrl + Shift + E' class='iconYes'>"+Screenful.Loc.cancel+"</buttton>").appendTo($toolbar).on("click", Screenful.Editor.view);
   	}
     if(!Screenful.Editor.singleton) $("<button id='butNonew' class='iconYes'>"+Screenful.Loc.cancel+"</buttton>").appendTo($toolbar).on("click", Screenful.Editor.nonew);
     if(Screenful.Editor.leaveUrl) $("<button id='butLeave' class='iconYes'>"+Screenful.Loc.cancel+"</buttton>").appendTo($toolbar).on("click", function(){window.location=Screenful.Editor.leaveUrl});
