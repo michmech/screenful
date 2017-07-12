@@ -14,6 +14,7 @@ Screenful.Editor={
     		$("<button id='butNew' class='iconYes'>"+Screenful.Loc.new+"</buttton>").appendTo($toolbar).on("click", Screenful.Editor.new);
     		$("<span class='divider'></span>").appendTo($toolbar);
       }
+      $("<span id='idlabel'>ID</span>").appendTo($toolbar);
   		$("<input id='idbox'/>").appendTo($toolbar).on("keyup", function(event){
   			if(event.which==27) $("#idbox").val(Screenful.Editor.entryID);
   			if(event.which==13) Screenful.Editor.open(event);
