@@ -3,7 +3,7 @@ Screenful.Navigator={
     Screenful.createEnvelope();
     $("#envelope").html("<div id='navbox'></div><div id='listbox'></div><div id='editbox'></div><div id='critbox' tabindex='0' style='display: none'></div>");
     $("#editbox").html("<iframe name='editframe' frameborder='0' scrolling='no' src='"+Screenful.Navigator.editorUrl+"'/>");
-    $("#navbox").html("<div class='line1'><button class='iconOnly' id='butCritOpen'>&nbsp;</button><input id='searchbox'/><button id='butSearch' class='iconOnly mergeLeft noborder'>&nbsp;</buttton><button class='iconYes noborder' id='butCritRemove' style='display: none;'>"+Screenful.Loc.removeFilter+"</button></div>");
+    $("#navbox").html("<div class='line1'><button class='iconOnly' id='butCritOpen'>&nbsp;</button><input id='searchbox' title='Ctrl + Shift + T'/><button id='butSearch' class='iconOnly mergeLeft noborder'>&nbsp;</buttton><button class='iconYes noborder' id='butCritRemove' style='display: none;'>"+Screenful.Loc.removeFilter+"</button></div>");
     $("#searchbox").on("keydown", function(e){if(!e.altKey) e.stopPropagation()});
     $("#searchbox").on("keyup", function(event){
       if(event.which==27) $("#searchbox").val("");
@@ -39,6 +39,12 @@ Screenful.Navigator={
           e.preventDefault();
           window.frames["editframe"].focus();
         }
+      }
+      //console.log(e.which, e.ctrlKey, e.metaKey, e.altKey, e.altGraphKey, e.shiftKey);
+      if(e.which==84 && (e.ctrlKey||e.metaKey) && e.shiftKey){ //T key
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        $("#searchbox").focus();
       }
       if(e.which==69 && (e.ctrlKey||e.metaKey) && e.shiftKey){ //E key
         if(window.frames["editframe"].Screenful){
@@ -150,7 +156,6 @@ Screenful.Navigator={
     var entry=event.data;
     if(window.frames["editframe"].Screenful) {
       window.frames["editframe"].Screenful.Editor.open(null, entry.id);
-      window.frames["editframe"].focus();
     }
   },
   setEntryAsCurrent: function(id){

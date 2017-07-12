@@ -17,6 +17,13 @@ Screenful.Editor={
           window.parent.Screenful.Navigator.focusEntryList();
         }
       }
+      if(e.which==84 && (e.ctrlKey||e.metaKey) && e.shiftKey){ //T key
+        if(window.parent!=window && window.parent.Screenful && window.parent.Screenful.Navigator) {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          window.parent.$("#searchbox").focus();
+        }
+      }
       if(e.which==69 && (e.ctrlKey||e.metaKey) && e.shiftKey){ //E key
         e.preventDefault();
         e.stopImmediatePropagation();
