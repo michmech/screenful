@@ -28,6 +28,7 @@ button.iconOnly#butSearch {background-image: url(magnifier.png);}
 #listbox .entry:first-child { border-top: 1px solid #eeeeee; }
 #listbox .entry:last-child {margin-bottom: 10px;}
 #listbox .entry:hover {background-color: #f7f9ea; text-shadow: 1px 1px 0px #ffffff;}
+#listbox .entry:focus {background-color: #f7f9ea; text-shadow: 1px 1px 0px #ffffff; outline: 1px dotted #666666;}
 #listbox .entry.current {background-color: rgb(153, 212, 255); text-shadow: 1px 1px 0px #dddddd;}
 #listbox .entry span.searchtext { background-color: #ffecb3; text-shadow: 0px 0px 0px transparent; border: 1px solid #ffffff; margin: 0px -1px; }
 
