@@ -23,4 +23,10 @@ Screenful.Loc={
   deleting: "Maže se heslo...",
   deletingFailed: "Nepovedlo se smazat heslo.",
   deleteConfirm: "Pozor s tímhle! Opravdu to chceš smazat?",
+  username: "E-mailová adresa",
+  password: "Heslo",
+  login: "Přihlásit se",
+  loginError: "Nesprávná e-mailová adresa nebo nesprávné heslo.",
+  logout: "Odhlásit se",
+  anonymous: "anonymní uživatel",
 };

@@ -6,9 +6,19 @@
 		<script type="text/javascript" src="../../jquery.js"></script>
 		<!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
 
-    <link type="text/css" rel="stylesheet" href="../screenful.css" />
-		<link type="text/css" rel="stylesheet" href="../screenful-navigator.css" />
+		<link type="text/css" rel="stylesheet" href="../screenful.css" />
 		<script type="text/javascript" src="../screenful.js"></script>
+
+		<link type="text/css" rel="stylesheet" href="../screenful-user.css" />
+		<script type="text/javascript" src="../screenful-user.js"></script>
+		<script type="text/javascript">
+		Screenful.User.loggedin=true;
+		Screenful.User.username="ahoj@mail.muni.cz";
+		Screenful.User.loginUrl="log-me-in.html";
+		Screenful.User.logoutUrl="log-me-out.html";
+		</script>
+
+		<link type="text/css" rel="stylesheet" href="../screenful-navigator.css" />
 		<script type="text/javascript" src="../screenful-navigator.js"></script>
 		<script type="text/javascript" src="../screenful-loc-en.js"></script>
 
@@ -19,7 +29,7 @@
 		<script type="text/javascript">
 		Screenful.Navigator.listUrl="apilist.json";
 		Screenful.Navigator.stepSize=10;
-		Screenful.Navigator.editorUrl="editor.html";
+		Screenful.Navigator.editorUrl="uieditor.html";
 		Screenful.Navigator.renderer=function(div, entry, searchtext){
 			//div = an HTML element to render the entry into
 			//entry = {id: "...", content: "..." or JSON}
@@ -45,11 +55,12 @@
 		<!--app-specific styles go here:-->
 		<style>
 		#header { background-color: rgb(253, 255, 218); padding: 20px; border-bottom: 1px solid #a5a818; }
+		#header .email {float: right;}
 		#footer { background-color: rgb(76, 158, 217); padding: 10px; }
 		</style>
 	</head>
 	<body>
-		<div id="header">XYZ</div>
-		<!-- <div id="footer">I am a footer</div> -->
+		<div id="header">XYZ <div class="email ScreenfulUser"></div></div>
+		<div id="footer">I am a footer</div>
 	</body>
 </html>

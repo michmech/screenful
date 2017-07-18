@@ -19,4 +19,10 @@ Screenful.Loc={
   deleting: "Deleting entry...",
   deletingFailed: "Failed to delete entry.",
   deleteConfirm: "Careful now! Are you sure?",
+  username: "E-mail address",
+  password: "Password",
+  login: "Log in",
+  loginError: "Incorrect e-mail address or password.",
+  logout: "Log out",
+  anonymous: "anonymous user",
 };

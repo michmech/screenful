@@ -19,4 +19,10 @@ Screenful.Loc={
   deleting: "Iontráil á scrios...",
   deletingFailed: "Níor éirigh liom an iontráil a scrios.",
   deleteConfirm: "Cúramach anois! An bhfuil tú cinnte?",
+  username: "Seoladh ríomhphoist",
+  password: "Pasfhocal",
+  login: "logáil isteach",
+  loginError: "Seoladh ríomhphoist mícheart nó pasfhocal mícheart.",
+  logout: "Logáil amach",
+  anonymous: "úsáideoir anaithnid",
 };
