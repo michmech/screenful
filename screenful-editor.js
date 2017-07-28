@@ -1,7 +1,7 @@
 Screenful.Editor={
   start: function(){
     Screenful.createEnvelope();
-    $("#envelope").html("<div id='toolbar'></div><div id='container' class='empty'></div>");
+    $("#envelope").html("<div id='toolbar'></div><div id='container' class='empty'></div><div id='waiter' style='display: none'></div>");
     Screenful.Editor.populateToolbar();
     Screenful.status(Screenful.Loc.ready);
     Screenful.Editor.updateToolbar();
@@ -191,7 +191,13 @@ Screenful.Editor={
     $("#container").addClass("empty");
     if(!id) { //we are creating a new entry
       Screenful.status(Screenful.Loc.saving, "wait"); //"saving entry..."
+      if(Screenful.Editor.saveWaitMsg){
+        $("#curtain").show();
+        $("#waiter").html(Screenful.Editor.saveWaitMsg).show();
+      }
       $.ajax({url: Screenful.Editor.createUrl, dataType: "json", method: "POST", data: {content: content}}).done(function(data){
+        $("#waiter").hide();
+        $("#curtain").hide();
         if(!data.success) {
           Screenful.status(Screenful.Loc.savingFailed, "warn"); //"failed to save entry"
         } else {
@@ -212,7 +218,13 @@ Screenful.Editor={
     	});
     } else { //we are updating an existing entry
       Screenful.status(Screenful.Loc.saving, "wait"); //"saving entry..."
+      if(Screenful.Editor.saveWaitMsg){
+        $("#curtain").show();
+        $("#waiter").html(Screenful.Editor.saveWaitMsg).show();
+      }
       $.ajax({url: Screenful.Editor.updateUrl, dataType: "json", method: "POST", data: {id: id, content: content}}).done(function(data){
+        $("#waiter").hide();
+        $("#curtain").hide();
         if(!data.success) {
           Screenful.status(Screenful.Loc.savingFailed, "warn"); //"failed to save entry"
         } else {

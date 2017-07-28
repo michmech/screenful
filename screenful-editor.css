@@ -16,3 +16,9 @@
 #toolbar button.iconYes#butLeave {background-image: url(arrow_left.png);}
 #toolbar button.iconYes#butNonew {background-image: url(arrow_left.png);}
 #toolbar button.iconYes#butDelete {background-image: url(delete.png);}
+
+#waiter {
+  background-image: url(loader.gif); background-position: 30px 28px; background-repeat: no-repeat; padding: 30px 30px 30px 90px;
+  position: absolute; top: 300px; left: 30%; width: 40%; background-color: #ffffff; box-shadow: 0px 0px 5px #666666; border-radius: 4px; z-index: 10;
+  line-height: 1.75em;
+}
