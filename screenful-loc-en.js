@@ -25,4 +25,14 @@ Screenful.Loc={
   loginError: "Incorrect e-mail address or password.",
   logout: "Log out",
   anonymous: "anonymous user",
+
+  title: "Title",
+  titleEmpty: "The title should not be be empty.",
+  url: "URL",
+  urlEmpty: "The URL should not be be empty.",
+  urlShort: "The URL should be at least three characters long.",
+  urlInvalid: "The URL should not contain characters other than a-z, A-Z, 0-9 and hyphens.",
+  urlTaken: "This URL is already taken.",
+  template: "Template",
+  create: "Create",
 };

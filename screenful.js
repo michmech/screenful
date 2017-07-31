@@ -1,6 +1,6 @@
 var Screenful={
-  createEnvelope: function(){
-    var html="<div id='envelope'></div>";
+  createEnvelope: function(scrollable){
+    var html="<div id='envelope' class='"+(scrollable?"scrollable":"")+"'></div>";
     if(window.parent==window || (window.parent!=window && !window.parent.Screenful)) html+="<div id='statusbar'></div>";
     if($("#footer").length>0) $("#footer").before(html); else $("body").append(html);
     Screenful.resize();

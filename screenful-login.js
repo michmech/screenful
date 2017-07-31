@@ -1,6 +1,6 @@
 Screenful.Login={
   start: function(){
-    Screenful.createEnvelope();
+    Screenful.createEnvelope(true);
     $("#envelope").html("<form id='middlebox'></form>");
     $("#middlebox").append("<div class='field email'><div class='label'>"+Screenful.Loc.username+"</div><input class='textbox'/></div>");
     $("#middlebox").append("<div class='field password'><div class='label'>"+Screenful.Loc.password+"</div><input type='password' class='textbox'/></div>");
