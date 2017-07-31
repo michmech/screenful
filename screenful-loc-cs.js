@@ -1,8 +1,8 @@
 Screenful.Loc={
   howmany: function(n){
-	if(n==1) return n+" heslo";
-	if(n>1 && n<5) return n+" hesla";
-	return n+" hesel";
+  	if(n==1) return n+" heslo";
+  	if(n>1 && n<5) return n+" hesla";
+  	return n+" hesel";
   },
   ready: "Hotovo.",
   filter: "Filtrovat",
@@ -29,4 +29,14 @@ Screenful.Loc={
   loginError: "Nesprávná e-mailová adresa nebo nesprávné heslo.",
   logout: "Odhlásit se",
   anonymous: "anonymní uživatel",
+  home: "Domů",
+  title: "Nadpis",
+  titleEmpty: "Nadpis by neměl být prázdný.",
+  url: "URL",
+  urlEmpty: "URL by nemělo být prázdné.",
+  urlShort: "URL by mělo být aspoň tři znaky dlouhé.",
+  urlInvalid: "URL smí obsahovat jen znaky a-z, A-Z, 0-9 a pomlčku.",
+  urlTaken: "Toto URL už je obsazené.",
+  template: "Šablona",
+  create: "Vytvořit",
 };

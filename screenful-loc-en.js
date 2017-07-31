@@ -25,7 +25,7 @@ Screenful.Loc={
   loginError: "Incorrect e-mail address or password.",
   logout: "Log out",
   anonymous: "anonymous user",
-
+  home: "Home",
   title: "Title",
   titleEmpty: "The title should not be be empty.",
   url: "URL",
