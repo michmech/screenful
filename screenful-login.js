@@ -9,8 +9,8 @@ Screenful.Login={
 
     $("#middlebox div.field.email input").focus();
     $("#middlebox").on("submit", function(e){
-      var email=$("#middlebox div.field.email input").focus().val();
-      var password=$("#middlebox div.field.password input").focus().val();
+      var email=$("#middlebox div.field.email input").val();
+      var password=$("#middlebox div.field.password input").val();
       if(email!="" && password!="") Screenful.Login.login(email, password);
       return false;
     });
