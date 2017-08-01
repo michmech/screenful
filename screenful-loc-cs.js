@@ -39,4 +39,5 @@ Screenful.Loc={
   urlTaken: "Toto URL už je obsazené.",
   template: "Šablona",
   create: "Vytvořit",
+  finished: "Hotovo",
 };

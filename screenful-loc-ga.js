@@ -35,4 +35,5 @@ Screenful.Loc={
   urlTaken: "Tá an URL seo in úsáid cheana.",
   template: "Teimpléad",
   create: "Cruthaigh",
+  finished: "Críochnaithe",
 };

@@ -35,4 +35,5 @@ Screenful.Loc={
   urlTaken: "This URL is already taken.",
   template: "Template",
   create: "Create",
+  finished: "Finished",
 };
