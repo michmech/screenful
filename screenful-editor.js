@@ -214,6 +214,8 @@ Screenful.Editor={
           Screenful.status(Screenful.Loc.ready);
           Screenful.Editor.updateToolbar();
           if(window.parent!=window && window.parent.Screenful && window.parent.Screenful.Navigator) window.parent.Screenful.Navigator.refresh();
+          if(data.redirUrl) window.location=data.redirUrl;
+          if(Screenful.Editor.postCreateRedirUrl) window.location=Screenful.Editor.postCreateRedirUrl;
         }
     	});
     } else { //we are updating an existing entry
@@ -241,6 +243,8 @@ Screenful.Editor={
           Screenful.status(Screenful.Loc.ready);
           Screenful.Editor.updateToolbar();
           if(window.parent!=window && window.parent.Screenful && window.parent.Screenful.Navigator) window.parent.Screenful.Navigator.refresh();
+          if(data.redirUrl) window.location=data.redirUrl;
+          if(Screenful.Editor.postUpdateRedirUrl) window.location=Screenful.Editor.postUpdateRedirUrl;
         }
     	});
     }
@@ -259,6 +263,8 @@ Screenful.Editor={
           Screenful.status(Screenful.Loc.ready);
           Screenful.Editor.updateToolbar();
           if(window.parent!=window && window.parent.Screenful && window.parent.Screenful.Navigator) window.parent.Screenful.Navigator.refresh();
+          if(data.redirUrl) window.location=data.redirUrl;
+          if(Screenful.Editor.postDeleteRedirUrl) window.location=Screenful.Editor.postDeleteRedirUrl;
         }
     	});
     }
