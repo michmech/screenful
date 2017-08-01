@@ -17,7 +17,7 @@ Screenful.Progress={
 
       var todo=Screenful.Progress.totalTodo;
       var done=Screenful.Progress.totalTodo-data.todo;
-      var percentage=Math.round(done/todo*100);
+      var percentage=0; if(todo>0) percentage=Math.round(done/todo*100);
       $("#middlebox .labels .right").html(done+"/"+todo);
       $("#middlebox .labels .left").html(percentage+"%");
       $("#middlebox .meter .done").css("width", percentage+"%");

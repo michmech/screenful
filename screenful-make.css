@@ -22,3 +22,5 @@
 
 #middlebox div.two div.message {text-align: center; margin: 50px 0px 0px 0px;}
 #middlebox div.two div.url {text-align: center; margin: 10px 0px 50px 0px;}
+#middlebox div.two div.url a {text-decoration: none; color: #004f9b;}
+#middlebox div.two div.url a:hover {color: #006ed7;}
