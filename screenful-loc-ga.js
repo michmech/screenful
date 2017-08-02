@@ -1,5 +1,4 @@
 Screenful.Loc={
-  howmany: function(n){ return n+" iontráil"; },
   ready: "Réidh.",
   filter: "Scag",
   removeFilter: "Bain scagaire",

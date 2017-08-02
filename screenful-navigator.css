@@ -9,7 +9,7 @@ input#searchbox {font: inherit; border: 1px inset #cccccc; cursor: inline; borde
 button#butCritOpen {background-image: url(find.png);}
 button#butCritOpen.on { background-color: rgb(198, 231, 255); }
 button#butCritRemove {background-image: url(cross.png);}
-button#butReload {background-image: url(arrow_refresh.png);}
+button#butReload {background-image: url(arrow_refresh.png); padding-top: 5px !important; padding-bottom: 5px !important; position: relative; top: -2px; margin-left: -2px; }
 button#butCritCancel {background-image: url(arrow_left.png);}
 button#butCritGo {background-image: url(find.png);}
 button.iconOnly#butSearch {background-image: url(magnifier.png);}
@@ -18,7 +18,7 @@ button.iconOnly#butSearch {background-image: url(magnifier.png);}
 #navbox .line1 { padding-left: 10px; border-bottom: 1px solid #eeeeee; overflow-x: hidden; white-space: nowrap;}
 #navbox .line2 { padding-left: 10px; margin: 0px 0px 0px 0px; overflow-x: hidden; white-space: nowrap; }
 #navbox .line2 button {padding-top: 0px; padding-bottom: 0px;}
-#navbox #countcaption {color: #666666; padding: 0px 20px 0px 10px;}
+#navbox #countcaption {color: #666666; padding: 14px 20px 0px 10px; float: right;}
 
 #critbox #editor { position: absolute; top: 15px; left: 15px; right: 10px; bottom: 4em; overflow-y: scroll; overflow-x: hidden; padding-right: 20px;}
 #critbox .buttons { position: absolute; left: 15px; right: 10px; bottom: 0px; text-align: right; }

@@ -1,9 +1,4 @@
 Screenful.Loc={
-  howmany: function(n){
-  	if(n==1) return n+" heslo";
-  	if(n>1 && n<5) return n+" hesla";
-  	return n+" hesel";
-  },
   ready: "Hotovo.",
   filter: "Filtrovat",
   removeFilter: "Odstranit filtr",

@@ -11,6 +11,7 @@
 
 #middlebox div.field.submit {text-align: center;}
 #middlebox div.field.submit input.button {font-weight: bold;}
+#middlebox div.field.submit button {font-weight: bold;}
 
 #middlebox div.error {background-color: #ffcdcc; color: #99004d; font-weight: bold; text-align: center; padding: 40px; margin: 30px -30px -40px -30px; text-shadow: 1px 1px 0px #eeeeee;}
 
