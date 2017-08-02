@@ -7,8 +7,8 @@ Screenful.Make={
     $("#middlebox .one").append("<div class='field template'><div class='label'>"+Screenful.Loc.template+"</div><select class='textbox'/><div class='instro'>"+Screenful.Make.templateHint+"</div></div>");
     $("#middlebox .one").append("<div class='field submit'><input class='button' type='submit' value='"+Screenful.Loc.create+"'/></div>");
     $("#middlebox .one").append("<div class='error' style='display: none'></div>");
-    $("#middlebox .two").append("<div class='message'>Your dictionary is ready.</div>");
-    $("#middlebox .two").append("<div class='url'><a href='hjhjh'>http://wwdedewfre</a></div>");
+    $("#middlebox .two").append("<div class='message'>"+Screenful.Make.finishedMessage+"</div>");
+    $("#middlebox .two").append("<div class='url'><a href=''></a></div>");
 
     $("#middlebox div.field.url input.post").width($("#middlebox div.field.url div.url").width()-$("#middlebox div.field.url span.pre").width()-10);
 
