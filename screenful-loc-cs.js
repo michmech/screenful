@@ -47,4 +47,6 @@ Screenful.Loc={
   passwordShort: "Heslo by mělo být aspoň šest znaků dlouhé.",
   passwordWhitespace: "Heslo by nemělo začínat ani končit mezerou.",
   ok: "OK",
+  currentUrl: "Současné URL",
+  newUrl: "Nové URL",
 };

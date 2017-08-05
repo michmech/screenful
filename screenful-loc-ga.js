@@ -47,4 +47,6 @@ Screenful.Loc={
   passwordShort: "Ba cheart sé charachtar, ar a laghad, a bheith sa phasfhocal.",
   passwordWhitespace: "Ní cheart spás a bheith ag tús ná ag deireadh an phasfhocail.",
   ok: "OK",
+  currentUrl: "URL reatha",
+  newUrl: "URL nua",
 };

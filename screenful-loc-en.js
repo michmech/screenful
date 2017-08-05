@@ -47,4 +47,6 @@ Screenful.Loc={
   passwordShort: "The password should be at least six characters long.",
   passwordWhitespace: "The password should not begin or end with a space.",
   ok: "OK",
+  currentUrl: "Current URL",
+  newUrl: "New URL",
 };
