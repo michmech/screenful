@@ -49,4 +49,9 @@ Screenful.Loc={
   ok: "OK",
   currentUrl: "Current URL",
   newUrl: "New URL",
+  download: "Download",
+  upload: "Upload",
+  uploadPurge: "Purge before upload",
+  uploadFail: "The upload has failed.",
+  uploadSuccess: "The upload has succeeded.",
 };
