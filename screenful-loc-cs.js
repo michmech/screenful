@@ -54,4 +54,5 @@ Screenful.Loc={
   uploadPurge: "Před nahráním vyprázdnit.",
   uploadFail: "Nahrávání selhalo.",
   uploadSuccess: "Nahrávání se povedlo.",
+  history: "Historie",
 };

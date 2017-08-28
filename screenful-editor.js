@@ -71,8 +71,9 @@ Screenful.Editor={
   	}
     if(!Screenful.Editor.singleton) $("<button id='butNonew' class='iconYes'>"+Screenful.Loc.cancel+"</buttton>").appendTo($toolbar).on("click", Screenful.Editor.nonew);
     if(Screenful.Editor.leaveUrl) $("<button id='butLeave' class='iconYes'>"+Screenful.Loc.cancel+"</buttton>").appendTo($toolbar).on("click", function(){window.location=Screenful.Editor.leaveUrl});
+    if(Screenful.Editor.historyUrl) $("<button id='butHistory' class='iconYes'>"+Screenful.Loc.history+"</buttton>").appendTo($toolbar).on("click", Screenful.Editor.history);
     if(!Screenful.Editor.singleton && Screenful.Editor.deleteUrl) {
-      $("<button id='butDelete' class='iconYes noborder'>"+Screenful.Loc.delete+"</buttton>").appendTo($toolbar).on("click", Screenful.Editor.delete);
+      $("<button id='butDelete' class='iconYes'>"+Screenful.Loc.delete+"</buttton>").appendTo($toolbar).on("click", Screenful.Editor.delete);
     }
   },
   entryID: null,
@@ -83,24 +84,28 @@ Screenful.Editor={
       $("#butNonew").hide();
       $("#butSave").hide(); $("#butSave .star").hide();
       $("#butDelete").hide();
+      $("#butHistory").hide();
     } else if(!Screenful.Editor.entryID){ //we have a new entry open
       $("#butEdit").hide();
       $("#butView").hide();
       $("#butNonew").show();
       $("#butSave").show(); $("#butSave .star").hide();
       $("#butDelete").hide();
+      $("#butHistory").hide();
     } else if(Screenful.Editor.entryID && $("#viewer").length>0){ //we have an existing entry open for viewing
       $("#butEdit").show();
       $("#butView").hide();
       $("#butNonew").hide();
       $("#butSave").hide(); $("#butSave .star").hide();
       $("#butDelete").show();
+      $("#butHistory").show();
     } else if(Screenful.Editor.entryID && $("#editor").length>0){ //we have an existing entry open for editing
       $("#butEdit").hide();
       $("#butView").show();
       $("#butNonew").hide();
       $("#butSave").show(); $("#butSave .star").hide();
       $("#butDelete").show();
+      $("#butHistory").show();
     }
     if($("#butNonew:visible").length==0 && $("#butView:visible").length==0){
       $("#butLeave").show();
@@ -271,6 +276,11 @@ Screenful.Editor={
   },
   changed: function(){
     $("#butSave .star").show();
+  },
+  history: function(){
+    var id=Screenful.Editor.entryID;
+    var url=Screenful.Editor.historyUrl.replace("$", encodeURIComponent(id));
+    window.location=url;
   },
 };
 $(window).ready(Screenful.Editor.start);

@@ -54,4 +54,5 @@ Screenful.Loc={
   uploadPurge: "Folmhaigh roimh an uaslódáil",
   uploadFail: "Theip ar an uaslódáil.",
   uploadSuccess: "D'éirigh leis an uaslódáil.",
+  history: "Stair",
 };

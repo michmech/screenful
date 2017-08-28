@@ -54,4 +54,5 @@ Screenful.Loc={
   uploadPurge: "Purge before upload",
   uploadFail: "The upload has failed.",
   uploadSuccess: "The upload has succeeded.",
+  history: "History",
 };
