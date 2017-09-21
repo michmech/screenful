@@ -84,7 +84,7 @@ Screenful.Editor={
       $("#butNonew").hide();
       $("#butSave").hide(); $("#butSave .star").hide();
       $("#butDelete").hide();
-      $("#butHistory").hide();
+      if(!$("#container").hasClass("deleted")) $("#butHistory").hide();
     } else if(!Screenful.Editor.entryID){ //we have a new entry open
       $("#butEdit").hide();
       $("#butView").hide();
@@ -107,6 +107,7 @@ Screenful.Editor={
       $("#butDelete").show();
       $("#butHistory").show();
     }
+    $("#container").removeClass("deleted");
     if($("#butNonew:visible").length==0 && $("#butView:visible").length==0){
       $("#butLeave").show();
     } else {
@@ -262,9 +263,11 @@ Screenful.Editor={
         if(!data.success) {
           Screenful.status(Screenful.Loc.deletingFailed, "warn"); //"failed to delete entry"
         } else {
-          Screenful.Editor.entryID=null;
-          $("#idbox").val("");
-          $("#container").addClass("empty").html("");
+          if(!Screenful.Editor.historyUrl) {
+            Screenful.Editor.entryID=null;
+            $("#idbox").val("");
+          }
+          $("#container").addClass("empty deleted").html("");
           Screenful.status(Screenful.Loc.ready);
           Screenful.Editor.updateToolbar();
           if(window.parent!=window && window.parent.Screenful && window.parent.Screenful.Navigator) window.parent.Screenful.Navigator.refresh();
