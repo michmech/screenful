@@ -1,0 +1,29 @@
+[
+  {
+    "entry_id": 123,
+    "revision_id": 432434,
+    "action": "delete",
+    "when": "2017-09-21T09:19:22.829Z",
+    "email": "valselob@gmail.com",
+    "content": "",
+    "historiography": {}
+  },
+  {
+    "entry_id": 123,
+    "revision_id": 432433,
+    "action": "update",
+    "when": "2017-09-21T08:19:22.829Z",
+    "email": "valselob@gmail.com",
+    "content": "<entry/>",
+    "historiography": {}
+  },
+  {
+    "entry_id": 123,
+    "revision_id": 432432,
+    "action": "create",
+    "when": "2017-09-21T07:19:22.829Z",
+    "email": "valselob@gmail.com",
+    "content": "<entry/>",
+    "historiography": {}
+  }
+]

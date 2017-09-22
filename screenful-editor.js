@@ -52,6 +52,7 @@ Screenful.Editor={
   },
   populateToolbar: function(){
     var $toolbar=$("#toolbar");
+    if(Screenful.Editor.historyUrl) $("<button id='butHistory' class='iconYes'>"+Screenful.Loc.history+"</buttton>").appendTo($toolbar).on("click", Screenful.Editor.history);
     if(!Screenful.Editor.singleton) {
       if(Screenful.Editor.createUrl) {
     		$("<button id='butNew' title='Ctrl + Shift + N' class='iconYes'>"+Screenful.Loc.new+"</buttton>").appendTo($toolbar).on("click", Screenful.Editor.new);
@@ -72,14 +73,22 @@ Screenful.Editor={
   	}
     if(!Screenful.Editor.singleton) $("<button id='butNonew' class='iconYes'>"+Screenful.Loc.cancel+"</buttton>").appendTo($toolbar).on("click", Screenful.Editor.nonew);
     if(Screenful.Editor.leaveUrl) $("<button id='butLeave' class='iconYes'>"+Screenful.Loc.cancel+"</buttton>").appendTo($toolbar).on("click", function(){window.location=Screenful.Editor.leaveUrl});
-    if(Screenful.Editor.historyUrl) $("<button id='butHistory' class='iconYes'>"+Screenful.Loc.history+"</buttton>").appendTo($toolbar).on("click", Screenful.Editor.history);
+    //if(Screenful.Editor.historyUrl) $("<button id='butHistory' class='iconYes'>"+Screenful.Loc.history+"</buttton>").appendTo($toolbar).on("click", Screenful.Editor.history);
     if(!Screenful.Editor.singleton && Screenful.Editor.deleteUrl) {
       $("<button id='butDelete' class='iconYes'>"+Screenful.Loc.delete+"</buttton>").appendTo($toolbar).on("click", Screenful.Editor.delete);
     }
   },
   entryID: null,
   updateToolbar: function(){
-    if($("#container").hasClass("empty")) { //we have nothing open
+    $("#butHistory").removeClass("pressed");
+    if($("#container").hasClass("withHistory")) { //the history pane is open
+      $("#butEdit").hide();
+      $("#butView").hide();
+      $("#butNonew").hide();
+      $("#butSave").hide(); $("#butSave .star").hide();
+      $("#butDelete").hide();
+      $("#butHistory").addClass("pressed").show();
+    } else if($("#container").hasClass("empty")) { //we have nothing open
       $("#butEdit").hide();
       $("#butView").hide();
       $("#butNonew").hide();
@@ -288,13 +297,18 @@ Screenful.Editor={
     $("#butSave .star").show();
   },
   history: function(){
-    var id=Screenful.Editor.entryID || $("#idbox").val();;
-    $("#curtain").show().one("click", Screenful.Editor.hideHistory);
-    $("#history").show().focus();
+    if($("#container").hasClass("withHistory")) Screenful.Editor.hideHistory();
+    else {
+      var id=Screenful.Editor.entryID || $("#idbox").val();;
+      $("#container").addClass("withHistory");
+      $("#history").show();
+      Screenful.Editor.updateToolbar();
+    }
   },
   hideHistory: function(){
-    $("#history").hide().blur();
-    $("#curtain").hide();
+    $("#history").hide();
+    $("#container").removeClass("withHistory");
+    Screenful.Editor.updateToolbar();
   },
 };
 $(window).ready(Screenful.Editor.start);
