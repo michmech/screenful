@@ -2,7 +2,7 @@ Screenful.Editor={
   start: function(){
     Screenful.createEnvelope();
     $("#envelope").html("<div id='toolbar'></div><div id='container' class='empty'></div><div id='waiter' style='display: none'></div><div id='history' style='display: none'></div>");
-    if(Screenful.Editor.historyUrl) $("#history").html("<iframe name='historyframe' frameborder='0' scrolling='no' src='"+Screenful.Editor.historyUrl+"'/>");
+    if(Screenful.Editor.historyUrl) $("#history").html("<iframe name='historyframe' frameborder='0' scrolling='auto' src='"+Screenful.Editor.historyUrl+"'/>");
     Screenful.Editor.populateToolbar();
     Screenful.status(Screenful.Loc.ready);
     Screenful.Editor.updateToolbar();
@@ -303,6 +303,7 @@ Screenful.Editor={
       $("#container").addClass("withHistory");
       $("#history").show();
       Screenful.Editor.updateToolbar();
+      window.frames["historyframe"].Screenful.History.go(id);
     }
   },
   hideHistory: function(){
