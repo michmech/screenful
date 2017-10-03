@@ -49,7 +49,6 @@ Screenful.Loc={
   ok: "OK",
   currentUrl: "Současné URL",
   newUrl: "Nové URL",
-  download: "Stáhnout",
   upload: "Nahrát",
   uploadPurge: "Před nahráním vyprázdnit.",
   uploadFail: "Nahrávání selhalo.",
