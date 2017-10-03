@@ -297,8 +297,11 @@ Screenful.Editor={
     $("#butSave .star").show();
   },
   history: function(){
-    if($("#container").hasClass("withHistory")) Screenful.Editor.hideHistory();
-    else {
+    if($("#container").hasClass("withHistory")) {
+      Screenful.Editor.hideHistory();
+      var id=Screenful.Editor.entryID || $("#idbox").val();;
+      Screenful.Editor.view(null, id);
+    } else {
       var id=Screenful.Editor.entryID || $("#idbox").val();;
       $("#container").addClass("withHistory");
       $("#history").show();
@@ -308,7 +311,7 @@ Screenful.Editor={
   },
   hideHistory: function(){
     $("#history").hide();
-    $("#container").removeClass("withHistory");
+    if($("#container").hasClass("withHistory")) $("#container").removeClass("withHistory").html("<div id='viewer'></div>");
     Screenful.Editor.updateToolbar();
   },
 };

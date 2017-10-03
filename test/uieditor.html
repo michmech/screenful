@@ -38,13 +38,18 @@
 			$xml.find("paragraph").each(function(){ html+="<p>"+$(this).text()+"</p>"; });
 			$(div).html(html);
 		};
-		Screenful.Editor.editor=function(div, entry){
+		Screenful.Editor.editor=function(div, entry, uneditable){
 			//div = an HTML element to render the editable entry into
 			//entry = {id: "...", content: "..." or JSON}
 			docSpec.onchange=Screenful.Editor.changed;
 			Xonomy.setMode("nerd");
 			Xonomy.lang="ga";
-			Xonomy.render((entry ? entry.content : blankXml), div, docSpec);
+			var docSpecCopy=$.extend(true, {}, docSpec); //deep copy
+			if(uneditable) {
+				for(elName in docSpecCopy.elements) docSpecCopy.elements[elName].isReadOnly=true;
+				docSpecCopy.unknownElement.isReadOnly=true;
+			}
+			Xonomy.render((entry ? entry.content : blankXml), div, docSpecCopy);
 			if(!Xonomy.keyNav) Xonomy.startKeyNav(document, document.getElementById("container"));
 		};
 		Screenful.Editor.harvester=function(div){
