@@ -54,4 +54,5 @@ Screenful.Loc={
   uploadFail: "Nahrávání selhalo.",
   uploadSuccess: "Nahrávání se povedlo.",
   history: "Historie",
+  version: "Verze",
 };

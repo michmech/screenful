@@ -7,10 +7,10 @@ Screenful.History={
       } else {
         for(var i=0; i<data.length; i++){
           var hist=data[i];
-          if(hist.action!="delete") {
+          if(!Screenful.History.isDeletion(hist)) {
             var $div=$("<div class='revision'></div>").appendTo($("body"));
-            Screenful.History.drawRevision($div, hist);
-            if(i==0) Screenful.History.zoomRevision(hist.revision_id, true);
+            Screenful.History.drawRevision($div, hist, data.length-i);
+            if(i==0) Screenful.History.zoomRevision(Screenful.History.getRevisionID(hist), true);
           }
           var $div=$("<div class='interRevision'></div>").appendTo($("body"));
           Screenful.History.drawInterRevision($div, hist);
@@ -18,38 +18,35 @@ Screenful.History={
       }
     });
   },
-  drawRevision: function($div, hist){
-    $div.data("entry_id", hist.entry_id);
-    $div.data("revision_id", hist.revision_id);
-    $div.data("content", hist.content);
+  drawRevision: function($div, hist, versionNumber){
+    $div.data("hist", hist);
     $div.on("click", function(e){
-      Screenful.History.zoomRevision(hist.revision_id, true);
+      Screenful.History.zoomRevision(Screenful.History.getRevisionID(hist), true);
     });
     if(window.parent.Screenful.Editor.viewer){
       $div.append(" <span class='pretty'></span>")
       $div.find(".pretty").on("click", function(e){
-        Screenful.History.zoomRevision(hist.revision_id, false);
+        Screenful.History.zoomRevision(Screenful.History.getRevisionID(hist), false);
         e.stopPropagation();
       });
     }
-    $div.append("<span class='label'>"+hist.entry_id+":"+hist.revision_id+"</span>")
+    $div.append("<span class='id'>#"+Screenful.History.getRevisionID(hist)+"</span>");
+    $div.append("<span class='label'>"+Screenful.Loc.version+" "+versionNumber+"</span>");
   },
   drawInterRevision: function($div, hist){
     $div.append("<div class='arrowTop'></div>");
     $div.append("<div class='arrowMiddle'></div>");
     $div.append("<div class='arrowBottom'></div>");
-    $div.append(hist.action+", "+hist.email+", "+hist.when);
+    $div.append(Screenful.History.printAction(hist));
   },
   zoomRevision: function(revision_id, asSourceCode){
     $(".revision").removeClass("current").removeClass("pretty").each(function(){
       var $this=$(this);
-      if($this.data("revision_id")==revision_id) {
+      if(Screenful.History.getRevisionID($this.data("hist"))==revision_id) {
         $this.addClass("current");
         if(!asSourceCode) $this.addClass("pretty");
-        var entry_id=$this.data("entry_id");
-        var content=$this.data("content");
-        if(content){
-          var fakeentry={id: entry_id, content: content};
+        var fakeentry=Screenful.History.fakeEntry($this.data("hist"));
+        if(fakeentry){
           if(!asSourceCode && window.parent.Screenful.Editor.viewer){
             window.parent.$("#container").removeClass("empty").html("<div id='viewer'></div>");
             window.parent.Screenful.Editor.viewer(window.parent.document.getElementById("viewer"), fakeentry);
@@ -61,6 +58,5 @@ Screenful.History={
         }
       }
     });
-
   }
 };

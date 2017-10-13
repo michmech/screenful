@@ -14,6 +14,18 @@
 
 		<script type="text/javascript">
 		Screenful.History.historyUrl="apihistory.json";
+		Screenful.History.isDeletion=function(revision){
+			return revision.action=="delete";
+		};
+		Screenful.History.getRevisionID=function(revision){
+			return revision.revision_id;
+		};
+		Screenful.History.printAction=function(revision){
+			return revision.action+", "+revision.email+", "+revision.when;
+		};
+		Screenful.History.fakeEntry=function(revision){
+			return {id: revision.entry_id, content: revision.content};
+		};
 		</script>
 
 		<!--app-specific styles go here:-->

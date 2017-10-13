@@ -54,4 +54,5 @@ Screenful.Loc={
   uploadFail: "Theip ar an uaslódáil.",
   uploadSuccess: "D'éirigh leis an uaslódáil.",
   history: "Stair",
+  version: "Leagan",
 };

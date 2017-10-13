@@ -42,6 +42,7 @@
 			//div = an HTML element to render the editable entry into
 			//entry = {id: "...", content: "..." or JSON}
 			docSpec.onchange=Screenful.Editor.changed;
+			docSpec.allowModeSwitching=true;
 			Xonomy.setMode("nerd");
 			Xonomy.lang="ga";
 			var docSpecCopy=$.extend(true, {}, docSpec); //deep copy
