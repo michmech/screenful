@@ -55,4 +55,5 @@ Screenful.Loc={
   uploadSuccess: "Nahrávání se povedlo.",
   history: "Historie",
   version: "Verze",
+  clone: "Klonovat",
 };

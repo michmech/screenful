@@ -55,4 +55,5 @@ Screenful.Loc={
   uploadSuccess: "D'éirigh leis an uaslódáil.",
   history: "Stair",
   version: "Leagan",
+  clone: "Clónáil",
 };
