@@ -9,7 +9,7 @@ Screenful.History={
           var hist=data[i];
           if(!Screenful.History.isDeletion(hist)) {
             var $div=$("<div class='revision'></div>").appendTo($("body"));
-            Screenful.History.drawRevision($div, hist, data.length-i);
+            Screenful.History.drawRevision($div, hist, data.length-i, (i==0));
             if(i==0) Screenful.History.zoomRevision(Screenful.History.getRevisionID(hist), true);
           }
           var $div=$("<div class='interRevision'></div>").appendTo($("body"));
@@ -18,7 +18,7 @@ Screenful.History={
       }
     });
   },
-  drawRevision: function($div, hist, versionNumber){
+  drawRevision: function($div, hist, versionNumber, isLatest){
     $div.data("hist", hist);
     $div.on("click", function(e){
       Screenful.History.zoomRevision(Screenful.History.getRevisionID(hist), true);
@@ -30,7 +30,13 @@ Screenful.History={
         e.stopPropagation();
       });
     }
-    $div.append("<span class='id'>#"+Screenful.History.getRevisionID(hist)+"</span>");
+    if(!isLatest) {
+      $div.append("<span class='revive'>Revive</span>");
+      $div.find(".revive").on("click", function(e){
+        Screenful.History.reviveRevision(Screenful.History.getRevisionID(hist), false);
+        e.stopPropagation();
+      });
+    }
     $div.append("<span class='label'>"+Screenful.Loc.version+" "+versionNumber+"</span>");
   },
   drawInterRevision: function($div, hist){
@@ -58,5 +64,21 @@ Screenful.History={
         }
       }
     });
-  }
+  },
+  reviveRevision: function(revision_id){
+    $(".revision").each(function(){
+      var $this=$(this);
+      if(Screenful.History.getRevisionID($this.data("hist"))==revision_id) {
+        var fakeentry=Screenful.History.fakeEntry($this.data("hist"));
+        if(fakeentry){
+          window.parent.Screenful.Editor.hideHistory();
+          window.parent.$("#container").removeClass("empty").html("<div id='editor'></div>");
+          window.parent.Screenful.Editor.editor(window.parent.document.getElementById("editor"), fakeentry);
+          window.parent.$("#container").hide().fadeIn();
+          window.parent.Screenful.Editor.updateToolbar();
+          window.parent.Screenful.Editor.changed();
+        }
+      }
+    });
+  },
 };
