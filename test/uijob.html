@@ -2,18 +2,21 @@
 <html>
 	<head>
 		<meta charset="UTF-8"/>
-		<title>Screenful Upload</title>
+		<title>Screenful Job</title>
 		<script type="text/javascript" src="../../jquery.js"></script>
 		<!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
 
     <link type="text/css" rel="stylesheet" href="../screenful.css" />
-		<link type="text/css" rel="stylesheet" href="../screenful-upload.css" />
+		<link type="text/css" rel="stylesheet" href="../screenful-job.css" />
 		<script type="text/javascript" src="../screenful.js"></script>
-		<script type="text/javascript" src="../screenful-upload.js"></script>
-		<script type="text/javascript" src="../screenful-loc-en.js"></script>
+		<script type="text/javascript" src="../screenful-job.js"></script>
+		<script type="text/javascript" src="../screenful-loc-en.js"></script>totalTodo
 
 		<script type="text/javascript">
-		Screenful.Upload.url="apiupload.html";
+		Screenful.Job.message="Your application is doing something important. This may take a while.";
+		Screenful.Job.actionUrl="apijob.json";
+		Screenful.Job.state={"filename": "blabla.xml", "offset": 0};
+		Screenful.Job.awayUrl="away.html";
 		</script>
 
 		<!--app-specific styles go here:-->

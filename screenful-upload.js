@@ -15,11 +15,11 @@ Screenful.Upload={
 
     $("#middlebox .one form").on("submit", function(){
       $('#frmUploadTarget').one('load', function(){
-        var result=( $.trim(window.frames["frmUploadTarget"].document.body.textContent)=="true" ? true : false );
-        if(result){
+        var redirectUrl=$.trim(window.frames["frmUploadTarget"].document.body.textContent);
+        if(redirectUrl){
           $("#middlebox .one").hide();
           $("#middlebox .two").show();
-          if(Screenful.Upload.redirectUrl) window.location=Screenful.Upload.redirectUrl;
+          window.location=redirectUrl;
         } else {
           $("#middlebox .two").hide();
           $("#middlebox .one").show();

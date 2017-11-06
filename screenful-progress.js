@@ -11,7 +11,7 @@ Screenful.Progress={
   },
 
   batch: function(){
-    $.ajax({url: Screenful.Progress.resaveUrl, dataType: "json", method: "POST", data: {}}).done(function(data){
+    $.ajax({url: Screenful.Progress.actionUrl, dataType: "json", method: "POST", data: {}}).done(function(data){
       if(!Screenful.Progress.totalTodo) Screenful.Progress.totalTodo=data.todo;
       if(Screenful.Progress.totalTodo<data.todo) Screenful.Progress.totalTodo=data.todo;
 
@@ -25,7 +25,7 @@ Screenful.Progress={
       if(!data.todo) {
         $("#middlebox .buttons button").addClass("finished").html(Screenful.Loc.finished);
       } else {
-        window.setTimeout(Screenful.Progress.batch, 1000);
+        window.setTimeout(Screenful.Progress.batch, 1000); //1000 ms = 1 second
       }
     });
   },

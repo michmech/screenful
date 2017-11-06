@@ -56,4 +56,5 @@ Screenful.Loc={
   history: "Stair",
   version: "Leagan",
   clone: "Clónáil",
+  continue: "Lean ar aghaidh",
 };
