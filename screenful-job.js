@@ -5,7 +5,7 @@ Screenful.Job={
     $("#middlebox").append("<div class='message'>"+Screenful.Job.message+"</div>");
     $("#middlebox").append("<div class='waiter'></div>");
     $("#middlebox").append("<div class='progressMessage'></div>");
-    $("#middlebox").append("<div class='buttons'><button class='button finished' style='display: none'>"+Screenful.Loc.continue+"</button></div>");
+    $("#middlebox").append("<div class='buttons'><button class='button finished' style='display: none'>"+Screenful.Loc.finished+"</button></div>");
     $("#middlebox .buttons button").on("click", function(e){ window.location=Screenful.Job.awayUrl; });
     Screenful.Job.batch();
   },
