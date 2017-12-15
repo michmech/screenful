@@ -373,13 +373,13 @@ Screenful.Editor={
   },
   hideSourceCode: function(){
     var content=$("#sourceCode textarea").val();
-    if(Screenful.Editor.cleanupSourceCode) content=Screenful.Editor.cleanupSourceCode(content);
     if(Screenful.Editor.validateSourceCode && !Screenful.Editor.validateSourceCode(content)){
       //invalid source code:
       $("#errorMessage").html(Screenful.Loc.invalidSourceCode).fadeIn();
       window.setTimeout(function(){ $("#errorMessage").fadeOut(); }, 1000);
     } else {
       //valid source code:
+      if(Screenful.Editor.cleanupSourceCode) content=Screenful.Editor.cleanupSourceCode(content);
       var data={id: Screenful.Editor.entryID, content: content};
       if($("#container").hasClass("withSourceCode")) $("#container").removeClass("withSourceCode").html("<div id='editor'></div>");
       Screenful.Editor.editor(document.getElementById("editor"), data);
