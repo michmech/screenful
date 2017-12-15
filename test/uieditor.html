@@ -58,6 +58,19 @@
 			//returns "..." or JSON
 			return Xonomy.harvest();
 		};
+
+		Screenful.Editor.allowSourceCode=true;
+		Screenful.Editor.formatSourceCode=function(str){
+			return Screenful.formatXml(str);
+		};
+		Screenful.Editor.cleanupSourceCode=function(str){
+			return Screenful.cleanupXml(str);
+		};
+		Screenful.Editor.validateSourceCode=function(str){
+			return Screenful.isWellFormedXml(str);
+			//return Screenful.isWellFormedJson(str);
+		};
+
 		</script>
 
 		<!--app-specific styles go here:-->

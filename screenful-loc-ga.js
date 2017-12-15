@@ -56,4 +56,6 @@ Screenful.Loc={
   history: "Stair",
   version: "Leagan",
   clone: "Clónáil",
+  sourceCode: "Cód foinseach",
+  invalidSourceCode: "Cód foinseach neamhbhailí",
 };

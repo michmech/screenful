@@ -56,4 +56,6 @@ Screenful.Loc={
   history: "History",
   version: "Version",
   clone: "Clone",
+  sourceCode: "Source code",
+  invalidSourceCode: "Invalid source code",
 };

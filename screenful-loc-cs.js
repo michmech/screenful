@@ -56,4 +56,6 @@ Screenful.Loc={
   history: "Historie",
   version: "Verze",
   clone: "Klonovat",
+  sourceCode: "Zdrojový kód",
+  invalidSourceCode: "Neplatný zdrojový kód",
 };
