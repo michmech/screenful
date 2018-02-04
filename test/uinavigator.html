@@ -39,10 +39,12 @@
 			{value: "wordstart", caption: "contains a word that starts like this"},
 			{value: "substring", caption: "contains this sequence of characters"},
 		];
-		Screenful.Navigator.renderer=function(div, entry, searchtext){
+		Screenful.Navigator.renderer=function(div, entry, searchtext, modifier){
 			//div = an HTML element to render the entry into
 			//entry = {id: "...", content: "..." or JSON}
 			//searchtext = the contents of the search box, in case you want to highlight occurences of it
+			//modifier = the search modifer, if any, in case it's relevant for highlighting
+			console.log(modifier);
 			var $xml=$($.parseXML(entry.content));
 			var html="";
 			html+="<span>"+$xml.find("somexml").text()+"</span>";

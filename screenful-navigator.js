@@ -125,7 +125,7 @@ Screenful.Navigator={
         $("#listbox").html("");
         data.entries.forEach(function(entry){
           $("#listbox").append("<div class='entry' tabindex='0' data-id='"+entry.id+"'>"+entry.id+"</div>");
-          Screenful.Navigator.renderer($("div.entry[data-id=\""+entry.id+"\"]").toArray()[0], entry, searchtext);
+          Screenful.Navigator.renderer($("div.entry[data-id=\""+entry.id+"\"]").toArray()[0], entry, searchtext, modifier);
           $("div.entry[data-id=\""+entry.id+"\"]").on("click", entry, Screenful.Navigator.openEntry);
         });
         if(!noSFX) $("#listbox").hide().fadeIn();
