@@ -34,6 +34,11 @@
 		Screenful.Navigator.listUrl="apilist.json";
 		Screenful.Navigator.stepSize=10;
 		Screenful.Navigator.editorUrl="uieditor.html";
+		Screenful.Navigator.modifiers=[
+			{value: "start", caption: "starts like this"},
+			{value: "wordstart", caption: "contains a word that starts like this"},
+			{value: "substring", caption: "contains this sequence of characters"},
+		];
 		Screenful.Navigator.renderer=function(div, entry, searchtext){
 			//div = an HTML element to render the entry into
 			//entry = {id: "...", content: "..." or JSON}
