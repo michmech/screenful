@@ -11,7 +11,7 @@ Screenful.Loc={
   delete: "Scrios",
   listing: "Liosta á fháil...",
   listingFailed: "Níor éirigh liom liosta a fháil.",
-  reading: "Sonraí á fáil...",
+  reading: "Sonraí á bhfáil...",
   readingFailed: "Ní ann don iontráil.",
   saving: "Á shábháil...",
   savingFailed: "Níor éirigh liom na sonraí a shǎbháil.",
