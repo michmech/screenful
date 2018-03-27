@@ -14,7 +14,7 @@ Screenful.Loc={
   reading: "Sonraí á bhfáil...",
   readingFailed: "Ní ann don iontráil.",
   saving: "Á shábháil...",
-  savingFailed: "Níor éirigh liom na sonraí a shǎbháil.",
+  savingFailed: "Níor éirigh liom na sonraí a shábháil.",
   deleting: "Á scrios...",
   deletingFailed: "Níor éirigh liom na sonraí a scrios.",
   deleteConfirm: "Cúramach anois! An bhfuil tú cinnte?",
