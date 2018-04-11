@@ -59,4 +59,5 @@ Screenful.Loc={
   sourceCode: "Cód foinseach",
   invalidSourceCode: "Cód foinseach neamhbhailí",
   unsavedConfirm: "Tá athruithe déanta agat nach bhfuil sábháilte go fóill. An cuma leat go gcaillfear iad?",
+  doItLater: "Déan níos déanaí é",
 };
