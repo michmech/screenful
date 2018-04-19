@@ -44,7 +44,6 @@
 			//entry = {id: "...", content: "..." or JSON}
 			//searchtext = the contents of the search box, in case you want to highlight occurences of it
 			//modifier = the search modifer, if any, in case it's relevant for highlighting
-			console.log(modifier);
 			var $xml=$($.parseXML(entry.content));
 			var html="";
 			html+="<span>"+$xml.find("somexml").text()+"</span>";
@@ -61,6 +60,14 @@
 			//returns "..." or JSON
 			return Xonomy.harvest();
 		};
+		</script>
+
+		<link type="text/css" rel="stylesheet" href="../screenful-aftersave.css" />
+		<script type="text/javascript" src="../screenful-aftersave.js"></script>
+		<script type="text/javascript">
+		Screenful.Aftersave.message="Indexing...";
+		Screenful.Aftersave.actionUrl="apiprogress.json";
+		Screenful.Aftersave.maximizeUrl="uiprogress.html";
 		</script>
 
 		<!--app-specific styles go here:-->
