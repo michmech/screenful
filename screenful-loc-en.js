@@ -39,7 +39,6 @@ Screenful.Loc={
   signup: "Get an account",
   forgotPwd: "Forgot your password?",
   signupEmail: "To get an account send an e-mail to",
-  forgotPwdEmail: "If you have forgotten your password send an e-mail to",
   newPassword: "New password",
   change: "Change",
   passwordChanged: "Your password has been changed.",
@@ -60,4 +59,13 @@ Screenful.Loc={
   invalidSourceCode: "Invalid source code",
   unsavedConfirm: "You have unsaved changes. Are you sure you want to lose them?",
   doItLater: "Do it later",
+
+  forgotPwdEmail: "If you have forgotten your password, enter your e-mail address and we will send you instructions on how to create a new one.",
+  recoverPwd: "Get a new password",
+  forgotPwdError: "Incorrect e-mail address.",
+  tokenSent: "We have sent you an e-mail with instructions on how to reset your password.",
+  recoverPwdMsg: "You can change your password now.",
+  changePwdMsg: "You can change your password here.",
+  invalidToken: "This password reset link is invalid. It may have expired or has been used before.",
+
 };
