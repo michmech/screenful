@@ -59,13 +59,22 @@ Screenful.Loc={
   invalidSourceCode: "Cód foinseach neamhbhailí",
   unsavedConfirm: "Tá athruithe déanta agat nach bhfuil sábháilte go fóill. An cuma leat go gcaillfear iad?",
   doItLater: "Déan níos déanaí é",
+  badEmailError: "Seoladh ríomhphoist mícheart.",
 
   forgotPwdEmail: "Má tá do phasfhocal dearmadta agat, cuir do sheoladh ríomhphoist isteach anseo. Cuirfidh muidne treoracha chugat maidir leis an dóigh chun do phasfhocal a athrú.",
   recoverPwd: "Faigh pasfhocal nua",
-  forgotPwdError: "Seoladh ríomhphoist mícheart.",
   tokenSent: "Tá treoracha seolta againn chugat maidir leis an dóigh chun do phasfhocal a athrú.",
   recoverPwdMsg: "Is féidir leat do phasfhocal a athrú anois.",
   changePwdMsg: "Is féidir leat do phasfhocal a athrú anseo.",
   invalidToken: "Níl an nasc seo bailí. Seans go bhfuil sé imithe in éag, nó b'fhéidir gur baineadh úsáid as cheana.",
 
+  signupInfoEmail: "To get a new account, enter your e-mail address and we will send you instructions.",
+  signupButton: "Create new account",
+  signupTokenSent: "We have sent you an e-mail with instructions on how to create a new account.",
+  invalidSignupToken: "This signup link is invalid. It may have expired or has been used before.",
+  setPwdMsg: "Please set your password now.",
+  accountCreated: "We have created your account. You can now log in with your e-mail address and password.",
+  signupAccountExists: "You are trying to create an account for e-mail address that already has an account.",
+
+  autosave: "Sábháil uathoibríoch",
 };

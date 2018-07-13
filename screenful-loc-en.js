@@ -59,13 +59,22 @@ Screenful.Loc={
   invalidSourceCode: "Invalid source code",
   unsavedConfirm: "You have unsaved changes. Are you sure you want to lose them?",
   doItLater: "Do it later",
+  badEmailError: "Incorrect e-mail address.",
 
   forgotPwdEmail: "If you have forgotten your password, enter your e-mail address and we will send you instructions on how to create a new one.",
   recoverPwd: "Get a new password",
-  forgotPwdError: "Incorrect e-mail address.",
   tokenSent: "We have sent you an e-mail with instructions on how to reset your password.",
   recoverPwdMsg: "You can change your password now.",
   changePwdMsg: "You can change your password here.",
   invalidToken: "This password reset link is invalid. It may have expired or has been used before.",
 
+  signupInfoEmail: "To get a new account, enter your e-mail address and we will send you instructions.",
+  signupButton: "Create new account",
+  signupTokenSent: "We have sent you an e-mail with instructions on how to create a new account.",
+  invalidSignupToken: "This signup link is invalid. It may have expired or has been used before.",
+  setPwdMsg: "Please set your password now.",
+  accountCreated: "We have created your account. You can now log in with your e-mail address and password.",
+  signupAccountExists: "You are trying to create an account for e-mail address that already has an account.",
+
+  autosave: "Autosave",
 };
