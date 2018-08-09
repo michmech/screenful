@@ -1,7 +1,29 @@
 Screenful.Navigator={
   start: function(){
     Screenful.createEnvelope();
-    $("#envelope").html("<div id='navbox'></div><div id='listbox'></div><div id='editbox'></div><div id='critbox' tabindex='0' style='display: none'></div>");
+    $("#envelope").html("<div id='midcontainer'></div><div id='leftcontainer'><span class='closer'>×</span><div id='leftbox'></div></div>");
+
+    if(Screenful.Navigator.enableLeftPanel){
+      $("#envelope").addClass("leftContainerCollapsed");
+      $("#leftcontainer").on("click", function(e){
+        if($("#envelope").hasClass("leftContainerCollapsed")) {
+          $("#envelope").removeClass("leftContainerCollapsed").addClass("leftContainerExpanded");
+          if(Screenful.Facetor) Screenful.Facetor.show();
+        }
+      });
+      $("#leftcontainer > .closer").on("click", function(e){
+        $("#envelope").removeClass("leftContainerExpanded").addClass("leftContainerCollapsed");
+        var needReload=false;
+        if(Screenful.Facetor) {
+          if(Screenful.Facetor.harvest()) needReload=true;
+          Screenful.Facetor.hide();
+        }
+        e.stopPropagation();
+        if(needReload) Screenful.Navigator.list(e);
+      });
+    }
+
+    $("#midcontainer").html("<div id='navbox'></div><div id='listbox'></div><div id='editbox'></div><div id='critbox' tabindex='0' style='display: none'></div>");
     $("#editbox").html("<iframe name='editframe' frameborder='0' scrolling='no' src='"+Screenful.Navigator.editorUrl+"'/>");
     $("#navbox").html("<div class='line1'><button class='iconOnly' id='butCritOpen'>&nbsp;</button><input id='searchbox' title='Ctrl + Shift + T'/><button id='butSearch' class='iconOnly mergeLeft noborder'>&nbsp;</buttton><button class='iconYes noborder' id='butCritRemove' style='display: none;'>"+Screenful.Loc.removeFilter+"</button></div>");
     $("#navbox").append("<div class='lineModifiers'><span class='clickable'><span class='current'></span> <span class='arrow'>▼</span></span><div class='menu' style='display: none'></div></div>");
@@ -107,6 +129,7 @@ Screenful.Navigator={
     Screenful.Navigator.lastStepSize=howmany;
     Screenful.status(Screenful.Loc.listing, "wait"); //"getting list of entries"
     var url=Screenful.Navigator.listUrl;
+    var facets=null; if(Screenful.Facetor && $("#envelope").hasClass("leftContainerExpanded")) facets=Screenful.Facetor.harvest();
     var criteria=null; if(Screenful.Navigator.critHarvester) criteria=Screenful.Navigator.critHarvester(document.getElementById("editor"));
     var searchtext=$.trim($("#searchbox").val());
     var modifier=$.trim($("#navbox .lineModifiers .current").data("value"));
@@ -118,7 +141,7 @@ Screenful.Navigator={
       $("#butCritRemove").hide();
     }
     if(searchtext!="") $("#butCritRemove").show();
-    $.ajax({url: url, dataType: "json", method: "POST", data: {criteria: criteria, searchtext: searchtext, modifier: modifier, howmany: howmany}}).done(function(data){
+    $.ajax({url: url, dataType: "json", method: "POST", data: {facets: facets, criteria: criteria, searchtext: searchtext, modifier: modifier, howmany: howmany}}).done(function(data){
       if(!data.success) {
         Screenful.status(Screenful.Loc.listingFailed, "warn"); //"failed to get list of entries"
       } else {
