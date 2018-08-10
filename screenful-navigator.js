@@ -148,15 +148,31 @@ Screenful.Navigator={
         $("#countcaption").html(data.total);
         var $listbox=$("#listbox").html("");
         data.entries.forEach(function(entry){
-          var $item=$("<div class='entry' tabindex='0' data-id='"+entry.id+"'>"+entry.id+"</div>").appendTo($listbox);
-          Screenful.Navigator.renderer($item.toArray()[0], entry, searchtext, modifier);
+          var $item=$("<div class='entry' tabindex='0' data-id='"+entry.id+"'><div class='inside'>"+entry.id+"</div></div>").appendTo($listbox);
           $item.on("click", entry, Screenful.Navigator.openEntry);
+
+          //entry title:
+          Screenful.Navigator.renderer($item.find("div.inside").toArray()[0], entry, searchtext, modifier);
+
+          //entry flag:
+          if(Screenful.Navigator.flags.length>0 && Screenful.Navigator.entryFlagUrl && Screenful.Navigator.extractEntryFlag){
+            var $flagLink=$("<a class='entryFlagLink'></a>").prependTo($item);
+            var flag=Screenful.Navigator.flagLookup( Screenful.Navigator.extractEntryFlag(entry) );
+            $flagLink.css("background-color", flag.color);
+            $flagLink.on("click", Screenful.Navigator.entryFlagLinkClick);
+            var $menu=$("<div class='menu flagmenu' style='display: none'></div>").appendTo($item);
+            Screenful.Navigator.flags.map(flag => {
+              var $menuItem=$("<a href='javascript:void(null)'><span class='spot' style='background-color: "+flag.color+"'></span><span class='keyCaption'>"+flag.key+"</span>"+flag.label+"</a>").appendTo($menu);
+              $menuItem.on("click", Screenful.Navigator.entryFlag);
+              $menuItem.data("flag", flag);
+            });
+          }
 
           //entry menu:
           if(Screenful.Navigator.entryDeleteUrl){
-            var $menuLink=$("<a class='entryMenuLink'>&middot;&middot;&middot;</a>").appendTo($item);
+            var $menuLink=$("<a class='entryMenuLink'>&middot;&middot;&middot;</a>").prependTo($item);
             $menuLink.on("click", Screenful.Navigator.entryMenuLinkClick);
-            var $menu=$("<div class='menu' style='display: none'></div>").appendTo($item);
+            var $menu=$("<div class='menu entrymenu' style='display: none'></div>").appendTo($item);
             if(Screenful.Navigator.entryDeleteUrl){
               var $menuItem=$("<a href='javascript:void(null)'><span class='keyCaption'>Del</span>"+Screenful.Loc.delete+"</a>").appendTo($menu);
               $menuItem.on("click", Screenful.Navigator.entryDelete);
@@ -200,6 +216,14 @@ Screenful.Navigator={
           if(e.which==46){ //Delete key
             e.preventDefault();
             Screenful.Navigator.entryDelete(e);
+          }
+          if(Screenful.Navigator.flags.length>0 && Screenful.Navigator.entryFlagUrl){
+            for(var i=0; i<Screenful.Navigator.flags.length; i++) {
+              if(e.key==Screenful.Navigator.flags[i].key){
+                e.preventDefault();
+                Screenful.Navigator.entryFlag(e, Screenful.Navigator.flags[i].name)
+              }
+            }
           }
         });
         $("#listbox .entry").on("click", function(e){
@@ -264,14 +288,14 @@ Screenful.Navigator={
     var $menuLink=$(e.delegateTarget);
     var $entry=$menuLink.closest(".entry");
     var entryID=$entry.attr("data-id");
-    var $menu=$entry.find(".menu");
+    var $menu=$entry.find(".entrymenu");
     $("#listbox .menu").not($menu).hide();
     $(".menu").not($menu).slideUp();
     $menu.hide().slideDown();
     e.stopPropagation();
   },
   entryDelete: function(arg){ //arg = event object or entryID
-    var enryID=arg; if(typeof(arg)=="object") {
+    var entryID=arg; if(typeof(arg)=="object") {
       entryID=$(arg.delegateTarget).closest(".entry").attr("data-id");
       $(".menu").hide();
       arg.stopPropagation();
@@ -296,5 +320,51 @@ Screenful.Navigator={
       }
     }
   },
+
+  entryFlagLinkClick: function(e){
+    e.stopPropagation();
+    var $menuLink=$(e.delegateTarget);
+    var $entry=$menuLink.closest(".entry");
+    var entryID=$entry.attr("data-id");
+    var $menu=$entry.find(".flagmenu");
+    $("#listbox .menu").not($menu).hide();
+    $(".menu").not($menu).slideUp();
+    $menu.hide().slideDown();
+    e.stopPropagation();
+  },
+  flagLookup: function(flagName){
+    var ret=null;
+    Screenful.Navigator.flags.map(flag => { if(flag.name==flagName) ret=flag; });
+    return ret;
+  },
+  entryFlag: function(e, flagName){
+    if(flagName===undefined) flagName=$(e.delegateTarget).data("flag").name;
+    var flag=Screenful.Navigator.flagLookup(flagName);
+    var entryID=$(e.delegateTarget).closest(".entry").attr("data-id");
+    $(".menu").hide();
+    e.stopPropagation();
+    Screenful.status(Screenful.Loc.flagging, "wait"); //"flagging entry..."
+    $.ajax({url: Screenful.Navigator.entryFlagUrl, dataType: "json", method: "POST", data: {id: entryID, flag: flag.name}}).done(function(data){
+    if(!data.success) {
+      Screenful.status(Screenful.Loc.flaggingFailed, "warn"); //"failed to flag entry"
+    } else {
+      Screenful.status(Screenful.Loc.ready);
+      var $entry=$("div.entry[data-id=\""+entryID+"\"]");
+      if($entry.length>0){
+        $entry.find(".entryFlagLink").css("background-color", flag.color)
+        Screenful.Navigator.focusEntryList();
+        //if the entry is currently open in the editor, abandon it and reload it there:
+        if(window.frames["editframe"].Screenful && window.frames["editframe"].Screenful.Editor && window.frames["editframe"].Screenful.Editor.entryID==entryID) {
+          //window.frames["editframe"].Screenful.Editor.abandon();
+          window.frames["editframe"].Screenful.Editor.needsSaving=false;
+          window.frames["editframe"].Screenful.Editor.open(e, entryID);
+        }
+      }
+    }
+  });
+
+
+  },
+
 };
 $(window).ready(Screenful.Navigator.start);

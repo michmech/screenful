@@ -62,6 +62,16 @@
 		};
 
 		Screenful.Navigator.entryDeleteUrl="apidelete.json"; //optional
+
+		Screenful.Navigator.flags=[
+			{"name": "wrong_lemma", "label": "Wrong lemma", "color": "salmon", "key": "l"},
+			{"name": "wrong_pos", "label": "Wrong PoS", "color": "sandybrown", "key": "p"},
+			{"name": "", "label": "Unmark", "color": "", "key":"u"},
+		];
+		Screenful.Navigator.entryFlagUrl="apiflag.json";
+		Screenful.Navigator.extractEntryFlag=function(entry){
+			return "wrong_lemma";
+		};
 		</script>
 
 		<link type="text/css" rel="stylesheet" href="../screenful-aftersave.css" />
