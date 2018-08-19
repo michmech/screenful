@@ -20,7 +20,6 @@
 		//Screenful.Editor.singleton=true; //optional
 		//Screenful.Editor.entryID="890"; //optional
 		//Screenful.Editor.leaveUrl="navigator.html"; //optional
-		Screenful.Editor.historyUrl="uihistory.html"; //optional
 		Screenful.Editor.createUrl="apicreate.json"; //optional
 		Screenful.Editor.readUrl="apiread.json";
 		Screenful.Editor.updateUrl="apiupdate.json";
@@ -77,6 +76,24 @@
 
 		Screenful.Editor.allowAutosave=true;
 		Screenful.Editor.autosaveOn=true;
+		</script>
+
+		<link type="text/css" rel="stylesheet" href="../screenful-history.css" />
+		<script type="text/javascript" src="../screenful-history.js"></script>
+		<script type="text/javascript">
+		Screenful.History.historyUrl="apihistory.json";
+		Screenful.History.isDeletion=function(revision){
+			return revision.action=="delete";
+		};
+		Screenful.History.getRevisionID=function(revision){
+			return revision.revision_id;
+		};
+		Screenful.History.printAction=function(revision){
+			return revision.action+", "+revision.email+", "+revision.when;
+		};
+		Screenful.History.fakeEntry=function(revision){
+			return {id: revision.entry_id, content: revision.content};
+		};
 		</script>
 
 		<!--app-specific styles go here:-->
