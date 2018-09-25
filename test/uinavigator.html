@@ -11,6 +11,18 @@
 		<link type="text/css" rel="stylesheet" href="../screenful.css" />
 		<script type="text/javascript" src="../screenful.js"></script>
 
+		<script type="text/javascript" src="../screenful-uilang.js"></script>
+		<link type="text/css" rel="stylesheet" href="../screenful-uilang.css" />
+		<script type="text/javascript">
+		Screenful.Uilang.url="/changeuilang?lang=$",
+		Screenful.Uilang.languages=[
+			{abbr: "en", caption: "English"},
+			{abbr: "ga", caption: "Gaeilge"},
+			{abbr: "cs", caption: "česky"},
+		];
+		Screenful.Uilang.current="en";
+		</script>
+
 		<link type="text/css" rel="stylesheet" href="../screenful-user.css" />
 		<script type="text/javascript" src="../screenful-user.js"></script>
 		<script type="text/javascript">
@@ -97,12 +109,19 @@
 		<!--app-specific styles go here:-->
 		<style>
 		#header { xbackground-color: rgb(253, 255, 218); padding: 20px; border-bottom: 1px solid #a5a818; }
-		#header .email {float: right;}
+		#header .topright {float: right;}
+		#header .topright > .one {display: inline-block; margin-left: 1em;}
 		#footer { background-color: rgb(76, 158, 217); padding: 10px; }
 		</style>
 	</head>
 	<body>
-		<div id="header">XYZ <div class="email ScreenfulUser"></div></div>
+		<div id="header">
+			XYZ
+			<div class="topright">
+				<div class="one ScreenfulUilang"></div>
+				<div class="one ScreenfulUser"></div>
+			</div>
+		</div>
 		<div id="footer">I am a footer</div>
 	</body>
 </html>
