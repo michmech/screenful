@@ -98,6 +98,29 @@
 		};
 		</script>
 
+		<script type="text/javascript">
+		Screenful.Editor.allowCommenting=true;
+		Screenful.Editor.openCommenting=false;
+		</script>
+		<script type="text/javascript" src="../autosize.js"></script>
+		<script type="text/javascript" src="../screenful-commenting.js"></script>
+		<link type="text/css" rel="stylesheet" href="../screenful-commenting.css" />
+		<script type="text/javascript">
+		Screenful.Commenting.peekUrl="./apicommentPeek.json";
+		Screenful.Commenting.userID="someone@example.com";
+		Screenful.Commenting.listUrl="./apicommentList.json";
+		Screenful.Commenting.saveUrl="./apicommentSave.json";
+		Screenful.Commenting.deleteUrl="./apicommentDelete.json";
+		Screenful.Commenting.getExtranetTitle=function(xnetID){
+			return "Some Extranet";
+		};
+		Screenful.Commenting.allowTags=true;
+		Screenful.Commenting.tags=[
+			{id: "123", title: "Suggestion"},
+			{id: "456", title: "Question"},
+		];
+		</script>
+
 		<!--app-specific styles go here:-->
 		<style>
 		#header { background-color: rgb(76, 158, 217); padding: 20px; }
