@@ -1,6 +1,14 @@
 {
   "success": true,
   "total": 200,
+  "suggestions": [
+    "suggestion",
+    "another suggestion"
+  ],
+  "primeEntries": [
+    {"id": 1, "content": "<somexml>I am an entry.</somexml>"},
+    {"id": 2, "content": "<somexml>I am an entry too.</somexml>"}
+  ],
   "entries": [
     {"id": 345, "content": "<somexml>I am an entry.</somexml>"},
     {"id": 123, "content": "<somexml>I am an entry too.</somexml>"},
