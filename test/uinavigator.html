@@ -50,9 +50,23 @@
 		Screenful.Navigator.stepSize=10;
 		Screenful.Navigator.editorUrl="uieditor.html";
 		Screenful.Navigator.modifiers=[
-			{value: "start", caption: "starts like this"},
-			{value: "wordstart", caption: "contains a word that starts like this"},
-			{value: "substring", caption: "contains this sequence of characters"},
+			{position: "box", value: "searchEN", abbr: "EN", caption: "search in English"},
+			{position: "box", value: "searchDE", abbr: "DE", caption: "search in German"},
+
+			{position: "left", value: "start", caption: "starts like this"},
+			{position: "left", value: "wordstart", caption: "contains a word that starts like this"},
+			{position: "left", value: "substring", caption: "contains this sequence of characters"},
+
+			{position: "right", value: "sortEN", abbr: "EN", caption: "sort by in English"},
+			{position: "right", value: "sortDE", abbr: "DE", caption: "sort by German"},
+		];
+		Screenful.Navigator.actions=[
+			{caption: "Change status to <strong>checked</strong>", url: "./apibulkeditByQuery.json"},
+			{caption: "Change status to <strong>unchecked</strong>", url: "./apibulkeditByQuery.json"},
+		];
+		Screenful.Navigator.starlistActions=[
+			{caption: "Change status to <strong>checked</strong>", url: "./apibulkeditByIds.json"},
+			{caption: "Change status to <strong>unchecked</strong>", url: "./apibulkeditByIds.json"},
 		];
 		Screenful.Navigator.renderer=function(div, entry, searchtext, modifier){
 			//div = an HTML element to render the entry into
@@ -103,7 +117,33 @@
 		<link type="text/css" rel="stylesheet" href="../screenful-facetor.css" />
 		<script type="text/javascript" src="../screenful-facetor.js"></script>
 		<script type="text/javascript">
-		//Screenful.Facetor.somesetting="somevalue";
+		Screenful.Facetor.panes=[{
+		  render: function(div){
+		    var $inme=$(div);
+				$inme.append(`<div class="title"><span class="tab">Status</span></div>`);
+				var $select=$(`<select class="fullwidth" id="facStatus"></select>`).appendTo($inme);
+			    $select.append(`<option value="">(any status)</option>`);
+					$select.append(`<option value="0">unchecked</option>`);
+			    $select.append(`<option value="1">checked</option>`);
+					$select.on("change", Screenful.Facetor.change);
+					$select.on("change", function(){
+			      var val=$("#facStatus").val();
+			      if(val=="1") $("#facStatusAuthor").show(); else $("#facStatusAuthor").hide();
+			    });
+				var $select=$(`<select class="fullwidth sub" id="facStatusAuthor"></select>`).appendTo($inme).hide();
+			    $select.append(`<option value="">(by anyone)</option>`);
+			    $select.append(`<option value="self">by myself</option>`);
+			    $select.append(`<option value="else">by someone else</option>`);
+			    $select.on("change", Screenful.Facetor.change);
+			},
+			harvest: function(div){
+				var $inme=$(div);
+				var ret={};
+				ret.cStatus=$("#facStatus").val();
+				ret.pStatus=$("#facStatusAuthor").val();
+				return ret;
+			},
+		}];
 		</script>
 
 		<!--app-specific styles go here:-->
