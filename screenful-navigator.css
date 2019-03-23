@@ -54,6 +54,7 @@ button#butCritOpen {background-image: url(find.png);}
 button#butCritOpen.on { background-color: rgb(198, 231, 255); }
 button#butCritRemove {background-image: url(cross.png);}
 button#butReload {background-image: url(arrow_refresh.png); padding-top: 5px !important; padding-bottom: 5px !important; position: relative; top: -2px; margin-left: -2px; }
+button#butPrintable {background-image: url(printer.png); padding-top: 5px !important; padding-bottom: 5px !important; position: relative; top: -2px; margin-left: -2px; }
 button#butCritCancel {background-image: url(arrow_left.png);}
 button#butCritGo {background-image: url(find.png);}
 button.iconOnly#butSearch {background-image: url(magnifier.png);}
@@ -168,3 +169,26 @@ span#suggs span.sugg:hover {color: var(--link-hover);}
 .listbox .pager input.page {font: inherit; font-size: .95em; border: 0; margin: 0; padding: 2px 6px; width: 4em; text-align: right; color: #333333; box-shadow: inset 0px 0px 2px #999999; border-radius: 2px; margin-right: 0.5em;}
 .listbox .pager span.pages {margin-left: 0.25em;}
 .listbox .pager span.clear {clear: both;}
+
+body.printable {overflow: auto;}
+body.printable #header {display: none;}
+body.printable #footer {display: none;}
+body.printable #statusbar {display: none;}
+body.printable #envelope {position: relative; top: auto !important; left: auto !important; right: auto !important; bottom: auto !important; width: auto !important;}
+body.printable #midcontainer {position: relative; top: auto !important; left: auto !important; right: auto !important; bottom: auto !important; width: auto !important;}
+body.printable #editbox {display: none;}
+body.printable #leftcontainer {display: none !important;}
+body.printable #navbox {display: none !important;}
+body.printable #listbox {position: relative; top: auto !important; left: auto !important; right: auto !important; bottom: auto !important; width: auto !important; overflow-y: auto;}
+body.printable .entry .entryMenuLink {display: none;}
+body.printable .entry {cursor: auto;}
+body.printable .entry:hover {background-color: transparent; text-shadow: 0px 0px 0px transparent;}
+body.printable .entry:focus {outline: 0px;}
+body.printable .entry.current {background-color: transparent; text-shadow: 0px 0px 0px transparent;}
+
+#envelope #printableToolbar {display: none;}
+body.printable #envelope #printableToolbar {display: block; margin: 10px 0px -5px 5px;}
+body.printable #envelope #printableToolbar button#butPrintableOff {background-image: url(arrow_left.png); padding-top: 5px !important; padding-bottom: 5px !important; position: relative; top: 0px; margin-left: 0px; }
+@media print{
+  #envelope #printableToolbar {display: none !important;}
+}
