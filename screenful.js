@@ -33,16 +33,21 @@ var Screenful={
   	var wycID="screenful_wyc_"+Screenful.wycLastID;
   	if(Screenful.wycCache[url]) return callback(Screenful.wycCache[url]);
 	  Screenful.wycQueue.push(function(){ //push job to WYC queue
-		Screenful.wycIsRunning=true;
-		Screenful.wycQueue.shift(); //remove myself from the WYC queue
-		$.ajax({url: url, dataType: "json", method: "POST"}).done(function(data){
-			$("#"+wycID).replaceWith(callback(data));
-      if(Screenful.wycCache.length>1000) Screenful.wycCache.length=[];
-			Screenful.wycCache[url]=data;
-			if(Screenful.wycQueue.length>0) Screenful.wycQueue[0](); else Screenful.wycIsRunning=false; //run the next WYC job, or say that WYC has finished running
-		})
-	});
-	if(!Screenful.wycIsRunning && Screenful.wycQueue.length>0) Screenful.wycQueue[0]();
+  		Screenful.wycIsRunning=true;
+  		Screenful.wycQueue.shift(); //remove myself from the WYC queue
+      if(Screenful.wycCache[url]){
+  			$("#"+wycID).replaceWith(callback(Screenful.wycCache[url]));
+  			if(Screenful.wycQueue.length>0) Screenful.wycQueue[0](); else Screenful.wycIsRunning=false; //run the next WYC job, or say that WYC has finished running
+  		} else {
+    		$.ajax({url: url, dataType: "json", method: "POST"}).done(function(data){
+    			$("#"+wycID).replaceWith(callback(data));
+          if(Screenful.wycCache.length>1000) Screenful.wycCache.length=[];
+    			Screenful.wycCache[url]=data;
+    			if(Screenful.wycQueue.length>0) Screenful.wycQueue[0](); else Screenful.wycIsRunning=false; //run the next WYC job, or say that WYC has finished running
+    		});
+      }
+  	});
+  	if(!Screenful.wycIsRunning && Screenful.wycQueue.length>0) Screenful.wycQueue[0]();
   	return "<span class='wyc' id='"+wycID+"'></span>";
   },
 
