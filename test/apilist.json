@@ -10,8 +10,8 @@
     {"id": 2, "content": "<somexml>I am an entry too.</somexml>"}
   ],
   "entries": [
-    {"id": 345, "content": "<somexml>I am an entry.</somexml>"},
-    {"id": 123, "content": "<somexml>I am an entry too.</somexml>"},
+    {"id": 345, "hasChildren": true, "content": "<somexml>I am an entry.</somexml>"},
+    {"id": 123, "hasChildren": true, "content": "<somexml>I am an entry too.</somexml>"},
     {"id": 567, "content": "<somexml>I am also an entry.</somexml>"},
     {"id": 678, "content": "<somexml>I, too, am an entry.</somexml>"},
     {"id": 890, "content": "<somexml>I am an entry as well.</somexml>"},
