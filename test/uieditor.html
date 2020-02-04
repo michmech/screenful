@@ -22,10 +22,13 @@
 		//Screenful.Editor.singleton=true; //optional
 		//Screenful.Editor.entryID="890"; //optional
 		//Screenful.Editor.leaveUrl="navigator.html"; //optional
-		Screenful.Editor.createUrl="apicreate.json"; //optional
 		Screenful.Editor.readUrl="apiread.json";
+		Screenful.Editor.createUrl="apicreate.json"; //optional
 		Screenful.Editor.updateUrl="apiupdate.json";
 		Screenful.Editor.deleteUrl="apidelete.json"; //optional
+		Screenful.Editor.createFunc=function(data){}; //optional: what to do after a successful creation
+		Screenful.Editor.updateFunc=function(data){}; //optional: what to do after a successful update
+		Screenful.Editor.deleteFunc=function(data){}; //optional: what to do after a successful deletion
 		Screenful.Editor.saveWaitMsg="Saving saving...<br/>This may take a while, bro.";
 		// Screenful.Editor.postCreateRedirUrl="postcreate.html";
 		// Screenful.Editor.postUpdateRedirUrl="postupdate.html";
