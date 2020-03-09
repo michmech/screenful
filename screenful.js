@@ -1,7 +1,7 @@
 var Screenful={
   createEnvelope: function(scrollable){
     var html="<div id='envelope' class='"+(scrollable?"scrollable":"")+"'></div>";
-    if(window.parent==window || (window.parent!=window && !window.parent.Screenful)) html+="<div id='statusbar'></div>";
+    if(window.parent==window || (window.parent!=window && !window.parent.Screenful)) html+="<div id='statusbar'><span class='statusmessage'></span></div>";
     if($("#footer").length>0) $("#footer").before(html); else $("body").append(html);
     Screenful.resize();
     $(window).on("resize", Screenful.resize);
@@ -20,20 +20,29 @@ var Screenful={
     else {
       if(style=="wait") str="<span class='wait'></span>"+str;
       if(style=="warn") str="<span class='warn'></span>"+str;
-      $("#statusbar").html(str);
+      $("#statusbar .statusmessage").html(str);
     }
   },
 
   wycLastID: 0,
   wycCache: {},
+  wycQueue: [],
+  wycIsRunning: false,
   wyc: function(url, callback){ //a "when-you-can" function for delayed rendering: gets json from url, passes it to callback, and delayed-returns html-as-string from callback
-  	Xonomy.wycLastID++;
-  	var wycID="screenful_wyc_"+Xonomy.wycLastID;
-  	if(Xonomy.wycCache[url]) return callback(Xonomy.wycCache[url]);
-  	$.ajax({url: url, dataType: "json", method: "POST"}).done(function(data){
-  			$("#"+wycID).replaceWith(callback(data));
-  			Xonomy.wycCache[url]=data;
-  	});
+  	Screenful.wycLastID++;
+  	var wycID="screenful_wyc_"+Screenful.wycLastID;
+  	if(Screenful.wycCache[url]) return callback(Screenful.wycCache[url]);
+	  Screenful.wycQueue.push(function(){ //push job to WYC queue
+		Screenful.wycIsRunning=true;
+		Screenful.wycQueue.shift(); //remove myself from the WYC queue
+		$.ajax({url: url, dataType: "json", method: "POST"}).done(function(data){
+			$("#"+wycID).replaceWith(callback(data));
+      if(Screenful.wycCache.length>1000) Screenful.wycCache.length=[];
+			Screenful.wycCache[url]=data;
+			if(Screenful.wycQueue.length>0) Screenful.wycQueue[0](); else Screenful.wycIsRunning=false; //run the next WYC job, or say that WYC has finished running
+		})
+	});
+	if(!Screenful.wycIsRunning && Screenful.wycQueue.length>0) Screenful.wycQueue[0]();
   	return "<span class='wyc' id='"+wycID+"'></span>";
   },
 
