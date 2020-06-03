@@ -3,6 +3,7 @@
   "total": 200,
   "pages": 3,
   "page": 1,
+  "pageSize": 17,
   "suggestions": [
     "suggestion",
     "another suggestion"
