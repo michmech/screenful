@@ -71,7 +71,9 @@ Screenful.Editor={
   		$("<button id='butOpen' class='iconOnly mergeLeft noborder'>&nbsp;</button>").appendTo($toolbar).on("click", Screenful.Editor.open);
   		$("<span class='divider'></span>").appendTo($toolbar);
   	}
-    $("<button id='butSave' title='"+Screenful.Loc.save+" [Ctrl + Shift + S]' class='iconYes'><span>"+Screenful.Loc.save+"</span><span class='star' style='display: none'>*</span></button>").appendTo($toolbar).on("click", Screenful.Editor.save);
+    if(Screenful.Editor.harvester) {
+      $("<button id='butSave' title='"+Screenful.Loc.save+" [Ctrl + Shift + S]' class='iconYes'><span>"+Screenful.Loc.save+"</span><span class='star' style='display: none'>*</span></button>").appendTo($toolbar).on("click", Screenful.Editor.save);
+    }
     if(Screenful.Editor.viewer) {
   		if(Screenful.Editor.editor) $("<button id='butEdit' title='"+Screenful.Loc.edit+" [Ctrl + Shift + E]' class='iconYes'><span>"+Screenful.Loc.edit+"</span></button>").appendTo($toolbar).on("click", Screenful.Editor.edit);
   		$("<button id='butView' class='iconYes' title='"+Screenful.Loc.cancel+" [Ctrl + Shift + E]'><span>"+Screenful.Loc.cancel+"</span></button>").appendTo($toolbar).on("click", Screenful.Editor.view);
