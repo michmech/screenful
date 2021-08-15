@@ -1,6 +1,7 @@
 Screenful.Navigator={
   regime: "stepped",
   stepSize: 10,
+  stats: [], //the stats that came with the latest list
   start: function(){
     Screenful.createEnvelope();
 
@@ -333,6 +334,7 @@ Screenful.Navigator={
       if(!data.success) {
         Screenful.status(Screenful.Loc.listingFailed, "warn"); //"failed to get list of entries"
       } else {
+        Screenful.Navigator.stats=data.stats || [];
         Screenful.Navigator.pageSize=data.pageSize;
         $("#countcaption").html(data.total);
         var $listbox=$("#listbox").hide().html("");
