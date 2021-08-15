@@ -335,6 +335,7 @@ Screenful.Navigator={
         Screenful.status(Screenful.Loc.listingFailed, "warn"); //"failed to get list of entries"
       } else {
         Screenful.Navigator.stats=data.stats || [];
+        if(data.stats) Screenful.Facetor.show(); //redraw facetor if there are statistics
         Screenful.Navigator.pageSize=data.pageSize;
         $("#countcaption").html(data.total);
         var $listbox=$("#listbox").hide().html("");
