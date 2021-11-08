@@ -87,6 +87,7 @@
 		<script type="text/javascript" src="../screenful-history.js"></script>
 		<script type="text/javascript">
 		Screenful.History.historyUrl="apihistory.json";
+		Screenful.History.timelineOnly=false; //true => only the inter-revision bits are shown
 		Screenful.History.isDeletion=function(revision){
 			return revision.action=="delete";
 		};

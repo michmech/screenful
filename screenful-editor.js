@@ -430,11 +430,14 @@ Screenful.Editor={
       Screenful.Editor.needsSaving=false;
       if($("#container").hasClass("withHistory")) {
         Screenful.Editor.hideHistory();
-        var id=Screenful.Editor.entryID || $("#idbox").val();;
-        Screenful.Editor.view(null, id);
+        if(!Screenful.History.timelineOnly){
+          var id=Screenful.Editor.entryID || $("#idbox").val();;
+          Screenful.Editor.view(null, id);
+        }
       } else {
         var id=Screenful.Editor.entryID || $("#idbox").val();;
-        $("#container").html("").removeClass("withSourceCode").removeClass("withCommenting").addClass("withHistory");
+        if(!Screenful.History.timelineOnly) $("#container").html("");
+        $("#container").removeClass("withSourceCode").removeClass("withCommenting").addClass("withHistory");
         $("#history").show();
         Screenful.Editor.updateToolbar();
         $("#container .xonomy .layby").remove();
@@ -444,7 +447,10 @@ Screenful.Editor={
   },
   hideHistory: function(){
     $("#history").hide();
-    if($("#container").hasClass("withHistory")) $("#container").removeClass("withHistory").html("<div id='viewer'></div>");
+    if($("#container").hasClass("withHistory")){
+      $("#container").removeClass("withHistory");
+      if(!Screenful.History.timelineOnly) $("#container").html("<div id='viewer'></div>");
+    }
     Screenful.Editor.updateToolbar();
     Screenful.Editor.makeUnresizable();
   },
