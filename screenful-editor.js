@@ -81,7 +81,7 @@ Screenful.Editor={
     if(!Screenful.Editor.singleton) $("<button id='butNonew' class='iconYes' title='"+Screenful.Loc.cancel+"'><span>"+Screenful.Loc.cancel+"</span></button>").appendTo($toolbar).on("click", Screenful.Editor.nonew);
     if(Screenful.Editor.leaveUrl) $("<button id='butLeave' class='iconYes' title='"+Screenful.Loc.cancel+"'><span>"+Screenful.Loc.cancel+"</span></button>").appendTo($toolbar).on("click", function(){window.location=Screenful.Editor.leaveUrl});
     if(!Screenful.Editor.singleton) {
-      if(Screenful.Editor.createUrl) {
+      if(Screenful.Editor.createUrl && Screenful.Editor.harvester) {
     		$("<button id='butClone' class='iconYes' title='"+Screenful.Loc.clone+"'><span>"+Screenful.Loc.clone+"</span></button>").appendTo($toolbar).on("click", Screenful.Editor.clone);
       }
     }
