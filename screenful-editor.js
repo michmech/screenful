@@ -537,6 +537,12 @@ Screenful.Editor={
       window.parent.Screenful.Navigator.addToStarlist(list);
     }
   },
+  getStarlist: function(){
+    if(window.parent && window.parent.Screenful && window.parent.Screenful.Navigator){
+      return window.parent.Screenful.Navigator.starList;
+    }
+    return [];
+  },
 
   makeResizable: function(){
     var $resizerOverlay=$("<div id='resizerOverlay'></div>");
