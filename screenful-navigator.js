@@ -50,7 +50,7 @@ Screenful.Navigator={
         e.stopPropagation();
         if(needReload) Screenful.Navigator.list(e);
         $("#leftcontainer").css("width", "");
-        $("#midcontainer").css("left", "");
+        $("#midcontainer").css("inset-inline-start", "");
       });
     }
 
