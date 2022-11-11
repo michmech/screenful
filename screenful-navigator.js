@@ -373,7 +373,7 @@ Screenful.Navigator={
           });
         }
 
-        if(data.primeEntries && data.primeEntries.length>0 && data.entries.length>0){
+        if((data.primeEntries && data.primeEntries.length>0) || data.entries.length>0){
           if(Screenful.Navigator.regime=="paged"){
             Screenful.Navigator.printPager($listbox, data.page, data.pages);
           }
@@ -389,7 +389,7 @@ Screenful.Navigator={
         if(data.entries) data.entries.forEach(function(entry){ Screenful.Navigator.printEntry(entry, $listbox, searchtext, modifier); });
         if(!noSFX) $listbox.fadeIn(); else $listbox.show();
 
-        if(data.primeEntries && data.primeEntries.length>0 && data.entries.length>0){
+        if((data.primeEntries && data.primeEntries.length>0) || data.entries.length>0){
           if(Screenful.Navigator.regime=="stepped"){
             if(data.entries.length+(data.primeEntries?data.primeEntries.length:0)<data.total){
               $listbox.append("<div id='divMore'><button class='iconYes' id='butMore'>"+Screenful.Loc.more+"</button></div>");
