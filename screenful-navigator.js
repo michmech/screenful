@@ -114,11 +114,17 @@ Screenful.Navigator={
         var txt=obj.caption; if(obj.abbr) txt="<span class='abbr'>"+obj.abbr+"</span><span class='caption'>"+txt+"</span>";
         var $a=$("<a href='javascript:void(null)' >"+txt+"</a>");
         $a.data("value", obj.value);
+        $a.data("hideLeft", obj.hideLeft || false);
         $a.on("click", function(e){
           var $a=$(e.delegateTarget);
           var $current=$a.closest(".modifiers").find(".current");
           $current.html($a.html());
           $current.data("value", $a.data("value"));
+          if($a.data("hideLeft")){
+            $("#navbox .lineModifiersLeft span.clickable").css("visibility", "hidden");
+          } else {
+            $("#navbox .lineModifiersLeft span.clickable").css("visibility", "visible");
+          }
         });
         if(!obj.position) obj.position="left";
 
