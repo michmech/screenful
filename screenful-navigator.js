@@ -649,13 +649,15 @@ Screenful.Navigator={
   },
 
   printExporters: function($listbox, exporters){
-    var $exporters=$(`<div class="exporters"></div>`);
-    exporters.map(exporter => {
-      var $exporter=$(`<form method="POST" action="${exporter.url}"><button>${exporter.label}</button><input type="hidden" name="ids" value=""/></form>`);
-      $exporter.on("submit", Screenful.Navigator.collectIDsToExport);
-      $exporters.append($exporter);
-    });
-    $listbox.append($exporters);
+    if($listbox.find("div.entry").length>0){
+      var $exporters=$(`<div class="exporters"></div>`);
+      exporters.map(exporter => {
+        var $exporter=$(`<form method="POST" action="${exporter.url}"><button>${exporter.label}</button><input type="hidden" name="ids" value=""/></form>`);
+        $exporter.on("submit", Screenful.Navigator.collectIDsToExport);
+        $exporters.append($exporter);
+      });
+      $listbox.append($exporters);
+    }
   },
   collectIDsToExport: function(e){
     var $form=$(e.delegateTarget);
