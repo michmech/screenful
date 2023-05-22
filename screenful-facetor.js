@@ -2,9 +2,11 @@ Screenful.Facetor={
   panes: [],
   show: function(){
     //console.log("Facetor is showing itself.");
+    const scrollTop=$("#leftbox div").scrollTop();
     $("#leftbox").html("<div/>");
     Screenful.Facetor.panes[0].render($("#leftbox div")[0]);
     Screenful.Facetor.greyOrNot();
+    if(scrollTop) $("#leftbox div").scrollTop(scrollTop);
   },
   hide: function(){
     if(Screenful.Facetor.panes[0].close) Screenful.Facetor.panes[0].close();
