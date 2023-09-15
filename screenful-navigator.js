@@ -947,28 +947,50 @@ Screenful.Navigator={
   },
 
   populateActionMenu: function(){
-    var $menu=$("#navbox .line2 .menuContainer .menu");
+    var $menu=$("#navbox .line2 .menuContainer .menu").html("");
     Screenful.Navigator.actions.map(action => {
-      var $a=$("<a href='javascript:void(null)' >"+action.caption+"</a>").appendTo($menu).on("click", function(e){
-        if(confirm(Screenful.Loc.batchConfirm.replace("$X", $("#countcaption").html()))){
-          Screenful.status(Screenful.Loc.doingBatch, "wait"); //"performing batch edit"
-          var listParams=Screenful.Navigator.harvestListParams();
-          $.ajax({url: action.url, dataType: "json", method: "POST", data: listParams}).done(function(data){
-            if(!data.success) {
-              Screenful.status(Screenful.Loc.batchFailed, "warn"); //"failed to perform batch edit"
-            } else {
-              Screenful.status(Screenful.Loc.ready);
-              //abandon whatever is in the editor:
-              if(window.frames["editframe"].Screenful && window.frames["editframe"].Screenful.Editor) {
-                window.frames["editframe"].Screenful.Editor.needsSaving=false;
-                window.frames["editframe"].Screenful.Editor.abandon();
-              }
-              Screenful.Navigator.list(null, null, true);
-            }
-          });
-        }
-      });
+      if(action.url){
+        var $a=this.printActionMenuItem(action);
+        $a.appendTo($menu);
+      } else if(action.children && action.children.length>0) {
+        var $div=$(`
+          <div class="rollout">
+            <div class="title">${action.caption}<span class="arrow">▼</span></div>
+            <div class="children" style="display: none"></div>
+          </div>
+        `).appendTo($menu);
+        $div.find("div.title").on("click", function(e){
+          $div.find("div.children").slideToggle("fast");
+          e.stopImmediatePropagation();
+        });
+        action.children.map(subaction => {
+          var $a=this.printActionMenuItem(subaction);
+          $a.appendTo($div.find("div.children"));
+        });
+      }
     });
+  },
+  printActionMenuItem: function(action){
+    var $a=$("<a href='javascript:void(null)' >"+action.caption+"</a>").on("click", function(e){
+      if(confirm(Screenful.Loc.batchConfirm.replace("$X", $("#countcaption").html()))){
+        Screenful.status(Screenful.Loc.doingBatch, "wait"); //"performing batch edit"
+        var listParams=Screenful.Navigator.harvestListParams();
+        $.ajax({url: action.url, dataType: "json", method: "POST", data: listParams}).done(function(data){
+          if(!data.success) {
+            Screenful.status(Screenful.Loc.batchFailed, "warn"); //"failed to perform batch edit"
+          } else {
+            Screenful.status(Screenful.Loc.ready);
+            //abandon whatever is in the editor:
+            if(window.frames["editframe"].Screenful && window.frames["editframe"].Screenful.Editor) {
+              window.frames["editframe"].Screenful.Editor.needsSaving=false;
+              window.frames["editframe"].Screenful.Editor.abandon();
+            }
+            Screenful.Navigator.list(null, null, true);
+          }
+        });
+      }
+    });
+    return $a;
   },
 
   printableOn: function(event){

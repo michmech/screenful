@@ -117,9 +117,17 @@ button.iconOnly#butSearch {background-image: url(magnifier.png);}
 #navbox .line2 .menuContainer div.menu {font-size: 0.9em; border: 1px solid var(--border); background-color: #ffffff; border-radius: 4px; box-shadow: 0px 0px 4px #666666; position: absolute; margin-top: 5px; z-index: 2; white-space: nowrap;}
 #navbox .line2 .menuContainer div.menu a {display: block; padding: 10px 20px; text-decoration: none; color: #333333; border-top: 1px solid #dddddd;}
 #navbox .line2 .menuContainer div.menu a span.abbr {display: inline-block; width: 3em; overflow: hidden; text-align: center; box-sizing: border-box; padding: 4px 4px; margin: 0px 10px -10px -10px; position: relative; top: -3px; line-height: 1em; background-color: #cccccc; border-radius: 2px; text-shadow: 1px 1px 0px #ffffff;}
-#navbox .line2 .menuContainer div.menu a:first-child {border-top-left-radius: 4px; border-top-right-radius: 4px; border-top: 0px;}
-#navbox .line2 .menuContainer div.menu a:last-child {border-bottom-left-radius: 4px; border-bottom-right-radius: 4px;}
+#navbox .line2 .menuContainer div.menu > a:first-child {border-top-left-radius: 4px; border-top-right-radius: 4px; border-top: 0px;}
+#navbox .line2 .menuContainer div.menu > a:last-child {border-bottom-left-radius: 4px; border-bottom-right-radius: 4px;}
 #navbox .line2 .menuContainer div.menu a:hover {background-color: #f7f9ea; }
+
+#navbox .line2 .menuContainer div.menu div.rollout {display: block; }
+#navbox .line2 .menuContainer div.menu div.rollout div.title {display: block; padding: 10px 60px 10px 20px; text-decoration: none; color: #444444; border-top: 1px solid #dddddd; cursor: pointer; position: relative;}
+#navbox .line2 .menuContainer div.menu div.rollout div.title span.arrow {color: #999999; font-size: 95%; position: absolute; right: 20px;}
+#navbox .line2 .menuContainer div.menu div.rollout:first-child div.title {border-top: 0px;}
+#navbox .line2 .menuContainer div.menu div.rollout div.title:hover {color: #000000; }
+[dir="ltr"] #navbox .line2 .menuContainer div.menu div.rollout div.children a {padding-left: 30px;}
+[dir="rtl"] #navbox .line2 .menuContainer div.menu div.rollout div.children a {padding-right: 30px;}
 
 #navbox .modifiers span.clickable { color: #999999; cursor: pointer;}
 #navbox .modifiers span.clickable:hover {color: var(--link); }
