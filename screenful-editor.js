@@ -69,7 +69,7 @@ Screenful.Editor={
   			if(event.which==13) Screenful.Editor.open(event);
       }).on("keydown", function(e){if(!e.altKey)e.stopPropagation()});;
   		$("<button id='butOpen' class='iconOnly mergeLeft noborder'>&nbsp;</button>").appendTo($toolbar).on("click", Screenful.Editor.open);
-  		$("<span class='divider'></span>").appendTo($toolbar);
+  		// $("<span class='divider'></span>").appendTo($toolbar);
   	}
     if(Screenful.Editor.harvester) {
       $("<button id='butSave' title='"+Screenful.Loc.save+" [Ctrl + Shift + S]' class='iconYes'><span>"+Screenful.Loc.save+"</span><span class='star' style='display: none'>*</span></button>").appendTo($toolbar).on("click", Screenful.Editor.save);

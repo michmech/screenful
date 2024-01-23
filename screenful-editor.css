@@ -29,7 +29,7 @@
 [dir="rtl"] #toolbar button.iconYes#butLeave {background-image: url(arrow_right.png);}
 [dir="ltr"] #toolbar button.iconYes#butNonew {background-image: url(arrow_left.png);}
 [dir="rtl"] #toolbar button.iconYes#butNonew {background-image: url(arrow_right.png);}
-#toolbar button.iconYes#butDelete {background-image: url(delete.png);}
+#toolbar button.iconYes#butDelete {background-image: url(delete.png); float: right}
 #toolbar button.iconYes#butClone {background-image: url(wand.png);}
 [dir="ltr"] #toolbar button.iconOnly#butSourceCode {background-image: url(page_white_text.png); float: right;}
 [dir="rtl"] #toolbar button.iconOnly#butSourceCode {background-image: url(page_white_text.png); float: left;}
