@@ -584,6 +584,26 @@ Screenful.Navigator={
     $("div.entry[data-id=\""+id+"\"]").addClass("current");
   },
 
+  getWholeList: function(cb){
+    Screenful.status(Screenful.Loc.listing, "wait"); //"getting list of entries"
+    var url=Screenful.Navigator.wholeListUrl;
+    var listParams=Screenful.Navigator.harvestListParams();
+    var criteria=listParams.criteria;
+    var facets=listParams.facets;
+    var searchtext=listParams.searchtext;
+    var modifier=listParams.modifier;
+    var data={facets: facets, criteria: criteria, searchtext: searchtext, modifier: modifier};
+    $.ajax({url: url, dataType: "json", method: "POST", data: data}).done(function(data){
+      if(!data.success) {
+        Screenful.status(Screenful.Loc.listingFailed, "warn"); //"failed to get list of entries"
+      } else {
+        Screenful.status(Screenful.Loc.ready);
+        cb(data.list);
+      }
+    });
+  },
+
+
   printPager: function($listbox, page, pages){
     if(pages>1){
       var $pager=$(`<div class="pager">
