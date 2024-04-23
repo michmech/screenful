@@ -17,7 +17,7 @@ Screenful.Commenting={
   },
   go: function(){
     var entryID=Screenful.Editor.entryID;
-    if(entryID && entryID!=Screenful.Commenting.currentEntryID){
+    if(entryID){
       Screenful.Commenting.currentEntryID=entryID;
       $("#commenting").html("");
       Screenful.Commenting.list();
