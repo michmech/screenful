@@ -26,6 +26,10 @@ div#curtainframe div.inside {
   bottom: 80px;
   z-index: 11;
 }
+div#curtainframe div.inside.narrow {
+  max-width: 800px;
+  margin: 0px auto;
+}
 div#curtainframe div.inside div.margin {
   background-color: #ffffff;
   position: absolute;

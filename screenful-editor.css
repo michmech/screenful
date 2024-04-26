@@ -10,6 +10,45 @@
 #container #viewer { position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; overflow-y: auto; padding: 10px 5px 5px 0px;}
 #container.empty {}
 
+#clusterTabs {
+  vertical-align: top;
+  display: inline-block;
+  position: relative;
+  top: 8px;
+  margin-left: 5px;
+}
+#clusterTabs span.memberID {
+  vertical-align: bottom;
+  display: inline-block;
+  padding: 7px 6px 4px 6px;
+  margin-left: 5px;
+  box-sizing: border-box;
+  color: #999999;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+}
+#clusterTabs span.memberID.current {
+  border-color: var(--border, #999999);
+  color: var(--link, #999999);
+}
+#clusterTabs span.memberID:hover {
+  color: var(--link-hover, #333333);
+}
+#clusterTabs span.clusterID {
+  vertical-align: bottom;
+  display: inline-block;
+  padding: 5px;
+  color: #999999;
+  margin-left: 5px;
+  margin-right: 5px;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-weight: bold;
+}
+#clusterTabs span.clusterID:hover {
+  color: #000000;
+}
+
 /*override positioning of Xonomy's layby*/
 #container .xonomy > div.layby {top: 55px}
 

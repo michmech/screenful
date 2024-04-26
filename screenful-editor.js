@@ -5,6 +5,10 @@ Screenful.Editor={
     Screenful.Editor.populateToolbar();
     Screenful.status(Screenful.Loc.ready);
     Screenful.Editor.updateToolbar();
+    Screenful.Editor.updateClusterTabs(null);
+    if(window.location.hash) {
+      Screenful.Editor.entryID=window.location.hash.replace(/^\#/, "");
+    }
     if(Screenful.Editor.entryID) Screenful.Editor.open(null, Screenful.Editor.entryID);
 
     //keyboard nav:
@@ -69,6 +73,7 @@ Screenful.Editor={
   			if(event.which==13) Screenful.Editor.open(event);
       }).on("keydown", function(e){if(!e.altKey)e.stopPropagation()});;
   		$("<button id='butOpen' class='iconOnly mergeLeft noborder'>&nbsp;</button>").appendTo($toolbar).on("click", Screenful.Editor.open);
+      $("<div id='clusterTabs'></div>").appendTo($toolbar);
   		// $("<span class='divider'></span>").appendTo($toolbar);
   	}
     if(Screenful.Editor.harvester) {
@@ -208,6 +213,7 @@ Screenful.Editor={
       $("#container").hide().fadeIn();
       Screenful.status(Screenful.Loc.ready);
       Screenful.Editor.updateToolbar();
+      Screenful.Editor.updateClusterTabs(null);
       if(window.parent!=window && window.parent.Screenful && window.parent.Screenful.Navigator) window.parent.Screenful.Navigator.setEntryAsCurrent(null);
     }
   },
@@ -228,6 +234,7 @@ Screenful.Editor={
           if(!data.success) {
             Screenful.status(Screenful.Loc.readingFailed, "warn"); //"failed to read entry"
             Screenful.Editor.updateToolbar();
+            Screenful.Editor.updateClusterTabs(null);
           } else {
             Screenful.Editor.entryID=data.id;
             $("#idbox").val(data.id);
@@ -239,6 +246,7 @@ Screenful.Editor={
             }
             Screenful.status(Screenful.Loc.ready);
             Screenful.Editor.updateToolbar();
+            Screenful.Editor.updateClusterTabs(data.clusters);
             if(window.parent!=window && window.parent.Screenful && window.parent.Screenful.Navigator) window.parent.Screenful.Navigator.setEntryAsCurrent(data.id);
 
             if(Screenful.Editor.allowCommenting) Screenful.Commenting.peek();
@@ -267,6 +275,7 @@ Screenful.Editor={
       			if(!data.success) {
               Screenful.status(Screenful.Loc.readingFailed, "warn"); //"failed to read entry"
               Screenful.Editor.updateToolbar();
+              Screenful.Editor.updateClusterTabs(null);
       			} else {
       			  Screenful.Editor.entryID=data.id;
       			  $("#idbox").val(data.id);
@@ -275,6 +284,7 @@ Screenful.Editor={
               $("#container").hide().fadeIn();
       			  Screenful.status(Screenful.Loc.ready);
       			  Screenful.Editor.updateToolbar();
+      			  Screenful.Editor.updateClusterTabs(data.clusters);
       			  if(window.parent!=window && window.parent.Screenful && window.parent.Screenful.Navigator) window.parent.Screenful.Navigator.setEntryAsCurrent(data.id);
 
               if(Screenful.Editor.allowCommenting) Screenful.Commenting.peek();
@@ -299,6 +309,7 @@ Screenful.Editor={
         Screenful.Editor.entryID=null;
         Screenful.status(Screenful.Loc.ready);
         Screenful.Editor.updateToolbar();
+        Screenful.Editor.updateClusterTabs(null);
         if(window.parent!=window && window.parent.Screenful && window.parent.Screenful.Navigator) window.parent.Screenful.Navigator.setEntryAsCurrent(null);
         Screenful.Editor.hideHCommenting();
       } else {
@@ -405,6 +416,7 @@ Screenful.Editor={
           $("#container").addClass("empty deleted").html("");
           Screenful.status(Screenful.Loc.ready);
           Screenful.Editor.updateToolbar();
+          Screenful.Editor.updateClusterTabs(null);
           if(Screenful.Editor.postDeleteRedirUrl) window.location=Screenful.Editor.postDeleteRedirUrl;
           if(window.parent!=window && window.parent.Screenful && window.parent.Screenful.Navigator) window.parent.Screenful.Navigator.refresh(id, "delete");
           if(window.parent!=window && window.parent.Screenful && window.parent.Screenful.Aftersave){
@@ -465,6 +477,7 @@ Screenful.Editor={
         if(!data.success) {
           Screenful.status(Screenful.Loc.readingFailed, "warn"); //"failed to read entry"
           Screenful.Editor.updateToolbar();
+          Screenful.Editor.updateClusterTabs(null);
         } else {
           Screenful.Editor.new(event, data.content);
         }
@@ -591,6 +604,32 @@ Screenful.Editor={
     $("#container").css("width", "");
     $("#commenting").css("width", "");
     $("#history").css("width", "");
+  },
+
+  updateClusterTabs: function(clusters){
+    $("#envelope").removeClass("hasClusters");
+    $("#clusterTabs").html("");
+    if(clusters && clusters.length>0){
+      clusters.map(cluster => {
+        cluster.memberIDs.map(memberID => {
+          var $el=$("<span class='memberID"+(memberID==Screenful.Editor.entryID?" current":"")+"'>"+memberID+"</span>");
+          $el.on("click", function(event){
+            $("#clusterTabs span.current").removeClass("current");
+            $el.addClass("current");
+            Screenful.Editor.open(event, memberID);
+          });
+          $("#clusterTabs").append($el);
+        });
+        var $el=$("<span class='clusterID'>&middot;&middot;&middot;</span>");
+        $el.on("click", function(event){
+          window.parent.Screenful.Curtain.openNarrow(Screenful.Editor.clusterEditorUrl+"#"+cluster.id, function(){
+            Screenful.Editor.open(event, Screenful.Editor.entryID);
+          });
+        });
+      $("#clusterTabs").append($el);
+      });
+      $("#envelope").addClass("hasClusters");
+    }
   },
 
 };
