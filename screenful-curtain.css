@@ -26,6 +26,14 @@ div#curtainframe div.inside {
   bottom: 80px;
   z-index: 11;
 }
+@media screen and (max-width: 700px) {
+  div#curtainframe div.inside {
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+  }
+}
 div#curtainframe div.inside.narrow {
   max-width: 800px;
   margin: 0px auto;
