@@ -857,7 +857,8 @@ Screenful.Navigator={
   starList: [],
   entryStar: function(arg){ //arg = event object or entryID
     var entryID=arg; if(typeof(arg)=="object") {
-      entryID=parseInt($(arg.delegateTarget).closest(".entry").attr("data-id"));
+      var dataID=$(arg.delegateTarget).closest(".entry").attr("data-id");
+      entryID=isNaN(dataID)?dataID:parseInt(dataID);
       $(".menu:visible").hide();
       arg.stopPropagation();
     }
