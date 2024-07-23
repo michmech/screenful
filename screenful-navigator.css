@@ -60,6 +60,10 @@ body.narrow.editorShown #starlist { display: none;}
 [dir="ltr"] #critbox { position: absolute; top: 70px; left: 15px;  bottom: 30px; max-height: 600px; width: 60%; background-color: #ffffff; box-shadow: 0px 0px 5px #666666; border-radius: 4px; z-index: 10;}
 [dir="rtl"] #critbox { position: absolute; top: 70px; right: 15px; bottom: 30px; max-height: 600px; width: 60%; background-color: #ffffff; box-shadow: 0px 0px 5px #666666; border-radius: 4px; z-index: 10;}
 body.narrow #editbox { border-left: 0px; border-right: 0px; }
+@media (max-width: 800px){
+  [dir="ltr"] #critbox { top: 15px; left: 15px; right: 15px; bottom: 15px; max-height: auto; width: auto; }
+  [dir="rtl"] #critbox { top: 15px; left: 15px; right: 15px; bottom: 15px; max-height: auto; width: auto; }
+}
 
 
 [dir="ltr"] #starlist > div.inside > div.title > div.menuContainer { float: right; font-size: 0.9em; position: relative; z-index: 5;}
